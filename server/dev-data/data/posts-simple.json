@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "userid": 5,
+    "heading": "A-230, Fan not Working",
+    "body": "Fan makes too much noise. It's shaft is shaking too much. Stops in the middle of night. Chances of Falling.",
+    "images": ["post-1-1.jpg", "post-1-2.jpg"],
+    "upvoteCount": 5,
+    "downvoteCount": 0,
+    "tags": ["electricity", "mechanic", "repair"],
+    "date": "2022-01-01"
+  },
+  {
+    "id": 1,
+    "userid": 7,
+    "heading": "2 Floor, A-wing, Water Leakage in Bathroom",
+    "body": "Taps not stopping. Too much water wastage",
+    "images": ["post-2-1.jpg", "post-2-2.jpg"],
+    "upvoteCount": 10,
+    "downvoteCount": 2,
+    "tags": ["plumbing", "environment"],
+    "date": "2022-03-03"
+  },
+  {
+    "id": 2,
+    "heading": "Test Post",
+    "body": "test text",
+    "tags": ["food", "mess"]
+  }
+]
