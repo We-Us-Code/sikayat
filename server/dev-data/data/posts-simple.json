@@ -1,30 +1,86 @@
 [
   {
-    "id": 0,
-    "userid": 5,
+    "name": "post 1", 
     "heading": "A-230, Fan not Working",
     "body": "Fan makes too much noise. It's shaft is shaking too much. Stops in the middle of night. Chances of Falling.",
+    "upvotersId": ["2", "3", "4"],
+    "downvotersId": ["1"],
+    "upvoteCount": 3,
+    "downvoteCount": 1,
     "images": ["post-1-1.jpg", "post-1-2.jpg"],
-    "upvoteCount": 5,
-    "downvoteCount": 0,
-    "tags": ["electricity", "mechanic", "repair"],
-    "date": "2022-01-01"
+    "userId": "5",
+    "tags": ["electricity", "mechanic", "repair"]
   },
   {
-    "id": 1,
-    "userid": 7,
-    "heading": "2 Floor, A-wing, Water Leakage in Bathroom",
-    "body": "Taps not stopping. Too much water wastage",
-    "images": ["post-2-1.jpg", "post-2-2.jpg"],
-    "upvoteCount": 10,
+    "name": "post 2", 
+    "heading": "B-231, Flush not Working",
+    "body": "Water Leakage all day from flush",
+    "upvotersId": ["2", "3"],
+    "downvotersId": ["5", "4"],
+    "upvoteCount": 2,
     "downvoteCount": 2,
-    "tags": ["plumbing", "environment"],
-    "date": "2022-03-03"
+    "images": ["post-2-1.jpg", "post-2-2.jpg"],
+    "userId": "1",
+    "tags": ["plumber", "mechanic", "repair"]
   },
   {
-    "id": 2,
-    "heading": "Test Post",
-    "body": "test text",
-    "tags": ["food", "mess"]
+    "name": "post 3", 
+    "heading": "B-440, Tubelight not working. ",
+    "body": "Tubelight black from sides. Out of date.",
+    "upvotersId": ["2", "3", "4"],
+    "downvotersId": [],
+    "upvoteCount": 3,
+    "downvoteCount": 0,
+    "images": ["post-3-1.jpg", "post-3-2.jpg"],
+    "userId": "2",
+    "tags": ["electricity", "replace"]
+  },
+  {
+    "name": "post 4",  
+    "heading": "A-730, Leakage from fire hose ",
+    "body": "Fire hose has been damaged. Water water everywhere.",
+    "upvotersId": ["2", "4", "3", "5"],
+    "downvotersId": ["1"],
+    "upvoteCount": 4,
+    "downvoteCount": 1,
+    "images": ["post-4-1.jpg", "post-4-2.jpg"],
+    "userId": "3",
+    "tags": ["water", "repair", "plumber"]
+  },
+  {
+    "name": "post 5",  
+    "heading": "A-101, LAN not Working",
+    "body": "Wire has broken from inside. Sparks are coming out.",
+    "upvotersId": ["4"],
+    "downvotersId": ["1", "2", "3", "5", "6"],
+    "upvoteCount": 1,
+    "downvoteCount": 5,
+    "images": ["post-5-1.jpg", "post-5-2.jpg"],
+    "userId": "4",
+    "tags": ["electricity", "mechanic", "repair"]
+  },
+  {
+    "name": "post 6",  
+    "heading": "B-224, Broken tables",
+    "body": "I sat on the table and its legs fall apart. New table needed",
+    "upvotersId": ["1", "2", "3", "4"],
+    "downvotersId": ["5"],
+    "upvoteCount": 4,
+    "downvoteCount": 1,
+    "images": ["post-6-1.jpg", "post-6-2.jpg"],
+    "userId": "1",
+    "tags": ["carpenter", "repair"]
+  },
+  {
+    "name": "post 7", 
+    "heading": "A-310, Fan not Working",
+    "body": "Fan makes too much noise. It's shaft is shaking too much. Stops in the middle of night. Chances of Falling.",
+    "upvotersId": ["1", "6", "7"],
+    "downvotersId": ["2", "4", "8", "9"],
+    "upvoteCount": 3,
+    "downvoteCount": 4,
+    "images": ["post-7-1.jpg", "post-7-2.jpg"],
+    "userId": "3",
+    "tags": ["electricity", "mechanic", "repair"]
   }
 ]

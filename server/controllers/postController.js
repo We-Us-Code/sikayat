@@ -1,89 +1,101 @@
-const fs = require('fs');
+const Post = require('./../models/postModel');
+const APIFeatures = require('./../utils/apiFeatures');
 
-const posts = JSON.parse(
-  fs.readFileSync(`${__dirname}/../dev-data/data/posts-simple.json`)
-);
+exports.getAllPosts = async (req, res) => {
+  try {
+    // EXECUTE QUERY
+    const features = new APIFeatures(Post.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    const posts = await features.query;
 
-/* Params Middleware for checking ID */
-exports.checkID = (req, res, next, val) => {
-  console.log(`Tour ID is ${val}`);
-  if (req.params.id * 1 > posts.length) {
-    return res.status(404).json({
+    // SEND RESPONSE
+    res.status(200).json({
+      status: 'success',
+      results: posts.length,
+      data: {
+        posts
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
       status: 'fail',
-      message: 'Invalid ID',
+      message: err
     });
   }
-  next();
 };
 
-exports.checkBody = (req, res, next) => {
-  if (!req.body.heading || !req.body.body) {
-    return res.status(400).json({
+exports.getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        post
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
       status: 'fail',
-      message: 'Missing heading or body',
+      message: err
     });
   }
-  next();
 };
 
-exports.getAllPosts = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    results: posts.length,
-    data: {
-      posts: posts,
-    },
-  });
+exports.createPost = async (req, res) => {
+  try {
+    const newPost = await Post.create(req.body);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        post: newPost
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err
+    });
+  }
 };
 
-exports.getPost = (req, res) => {
-  const id = req.params.id * 1;
-  const post = posts.find((el) => el.id === id);
+exports.updatePost = async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
 
-  console.log(req.params);
-  res.status(200).json({
-    status: 'success',
-    data: {
-      post,
-    },
-  });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        post: post
+      }
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err
+    });
+  }
 };
 
-exports.createPost = (req, res) => {
-  //console.log(req.body);
+exports.deletePost = async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
 
-  const newId = posts[posts.length - 1].id + 1;
-  const newPost = Object.assign({ id: newId }, req.body);
-
-  posts.push(newPost);
-
-  fs.writeFile(
-    `${__dirname}/dev-data/data/posts-simple.json`,
-    JSON.stringify(posts),
-    (err) => {
-      res.status(201).json({
-        status: 'success',
-        data: {
-          post: newPost,
-        },
-      });
-    }
-  );
-};
-
-exports.updatePost = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      post: '<Updated post here...>',
-    },
-  });
-};
-
-exports.deletePost = (req, res) => {
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
+    res.status(204).json({
+      status: 'success',
+      data: null
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
 };

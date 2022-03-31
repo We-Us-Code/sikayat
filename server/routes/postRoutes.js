@@ -4,12 +4,12 @@ const postController = require('./../controllers/postController');
 const router = express.Router();
 
 /* Param Middleware */
-router.param('id', postController.checkID);
+// router.param('id', postController.checkID);
 
 router
   .route('/')
   .get(postController.getAllPosts)
-  .post(postController.checkBody, postController.createPost);
+  .post(postController.createPost);
 
 router
   .route('/:id')
