@@ -6,6 +6,8 @@ const router = express.Router();
 /* Param Middleware */
 // router.param('id', postController.checkID);
 
+// Aliasing Route to be added here whenever needed
+
 router
   .route('/')
   .get(postController.getAllPosts)
