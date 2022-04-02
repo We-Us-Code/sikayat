@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Home = () => {
+const Post = () => {
   return (
     <div>
       <p>This is home component responsible for rendering the whole complaints, landing page if user is logged in</p>
@@ -8,4 +8,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Post

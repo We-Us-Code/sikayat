@@ -1,17 +1,21 @@
 import "../styles/App.css";
-import React from "react";
+import React, {useState} from "react";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Home from "./Home";
+import Post from "./Post";
+import Login from "./Login"
 
 const App = () => {
+
+  const [loggedIn, setloggedIn] = useState(false);
+
   return (
     <Router>
       <div className="App">
         <NavBar />
-        <h2>This is the root component</h2>
         <Routes>
-          <Route path="/" element={<Home/>}/>
+
+          <Route path="/" element={loggedIn ? <Post/>: <Login />} />
           
         </Routes>
       </div>
