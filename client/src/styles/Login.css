@@ -19,6 +19,7 @@
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
   padding: 0;
+  align-items: center;
 }
 
 .google-button:focus,
