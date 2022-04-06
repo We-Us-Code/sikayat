@@ -4,12 +4,12 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
+router.post('/googlelogin', authController.googlelogin);
+
 router
   .route('/')
   .get(userController.getAllUsers)
   .post(userController.createUser);
-
-router.post('/googlelogin', authController.googlelogin);
 
 router
   .route('/:id')

@@ -1,5 +1,6 @@
 const express = require('express');
 const postController = require('./../controllers/postController');
+const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(postController.getAllPosts)
+  .get(authController.protect, postController.getAllPosts)
   .post(postController.createPost);
 
 router
