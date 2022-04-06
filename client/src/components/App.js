@@ -6,10 +6,11 @@ import Post from "./Post";
 import Login from "./Login"
 import BottomBar from "./BottomBar";
 import AboutUs from "./AboutUs";
+import PostDetails from "./PostDetails";
 
 const App = () => {
 
-  const [loggedIn, setloggedIn] = useState(false);
+  const [loggedIn, setloggedIn] = useState(true);
 
   return (
     <Router>
@@ -19,6 +20,7 @@ const App = () => {
 
           <Route path="/" element={loggedIn ? <Post/>: <Login />} />
           <Route path="/aboutus" element = {<AboutUs />} />
+          <Route path="/postdetails" element = {<PostDetails/>} />
         </Routes>
         <BottomBar />
       </div>
