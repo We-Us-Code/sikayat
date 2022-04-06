@@ -12,7 +12,7 @@ const Login = () => {
     
     axios({
       method: "POST",
-      url: `${HOST}/api/v1/googlelogin`,
+      url: `${HOST}/api/v1/users/googlelogin`,
       data: {
         tokenId: response.tokenId
       }
