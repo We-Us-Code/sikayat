@@ -1,31 +1,31 @@
 import React from "react";
 import "../styles/Login.css";
 import { GoogleLogin } from "react-google-login";
-import {HOST} from "../constants"
+import { HOST } from "../constants";
 import axios from "axios";
 
-
 const Login = () => {
-
   const responseSuccessGoogle = (response) => {
-    console.log(HOST)
-    
+    console.log(HOST);
+
     axios({
       method: "POST",
       url: `${HOST}/api/v1/users/googlelogin`,
+      withCredentials: true,
+      credentials: "include",
       data: {
-        tokenId: response.tokenId
-      }
-    }).then((res) =>{
-      console.log(res)
-    })
+        tokenId: response.tokenId,
+      },
+    }).then((res) => {
+      console.log(res);
+    });
 
-    console.log(response)
-  }
-  
+    console.log(response);
+  };
+
   const responseErrorGoogle = (response) => {
-    console.log(response)
-  }
+    console.log(response);
+  };
 
   return (
     <section className="vh-100">

@@ -8,7 +8,7 @@ const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); // logs out the request
