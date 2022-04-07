@@ -40,10 +40,12 @@ const postSchema = new mongoose.Schema(
       type: Date,
       default: Date.now()
     },
-    userId: {
-      type: String,
-      required: [true, 'A post must have a user ID']
-    },
+    user: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ],
     tags: {
       type: [String],
       default: []
@@ -55,9 +57,26 @@ const postSchema = new mongoose.Schema(
   }
 );
 
+// DOCUMENT MIDDLEWARE: runs before .save() and .create()
+
+// Embedding the data inside document
+// postSchema.pre('save', async function(next) {
+//   const userPromises = this.user.map(async id => await User.findById(id));
+//   this.user = await Promise.all(userPromises);
+//   next();
+// });
+
 // QUERY MIDDLEWARE
 postSchema.pre(/^find/, function(next) {
   this.start = Date.now();
+  next();
+});
+
+postSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'user',
+    select: '-__v -email'
+  });
   next();
 });
 

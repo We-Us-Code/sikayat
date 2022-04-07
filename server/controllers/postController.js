@@ -28,7 +28,7 @@ exports.getPost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
 
   if (!post) {
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No post found with that ID', 404));
   }
 
   res.status(200).json({
@@ -40,7 +40,12 @@ exports.getPost = catchAsync(async (req, res, next) => {
 });
 
 exports.createPost = catchAsync(async (req, res, next) => {
-  const newPost = await Post.create(req.body);
+  const createdPost = {
+    heading: req.body.heading,
+    body: req.body.body,
+    user: req.user._id
+  };
+  const newPost = await Post.create(createdPost);
 
   res.status(201).json({
     status: 'success',
@@ -57,7 +62,7 @@ exports.updatePost = catchAsync(async (req, res, next) => {
   });
 
   if (!post) {
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No post found with that ID', 404));
   }
 
   res.status(200).json({
@@ -72,7 +77,7 @@ exports.deletePost = catchAsync(async (req, res, next) => {
   const post = await Post.findByIdAndDelete(req.params.id);
 
   if (!post) {
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No post found with that ID', 404));
   }
 
   res.status(204).json({
