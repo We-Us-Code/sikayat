@@ -12,6 +12,7 @@ import Spinner from "./Spinner";
 import { useEffect } from "react";
 import axios from "axios";
 import { HOST } from "../constants";
+import AddNewPost from "./AddNewPost";
 
 const App = () => {
   const contextLogin = useContext(loginContext);
@@ -48,7 +49,10 @@ const App = () => {
               element={isLoggedIn === "loggedin" ? <Post /> : (isLoggedIn === 'loggedout' ? <Login /> : <Spinner />)}
             />
             <Route path="/aboutus" element={<AboutUs />} />
+
             <Route path="/postdetails/:id" element={<PostDetails />} />
+            <Route path="/addnew" element={<AddNewPost/>}/>
+            
           </Routes>
         </div>
         <BottomBar />

@@ -35,6 +35,9 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
+          <Link to ="/addnew" >
+            <button className="btn btn-outline-success my-2 my-sm-0">Add New</button>
+          </Link>
         </div>
       </div>
     </nav>
