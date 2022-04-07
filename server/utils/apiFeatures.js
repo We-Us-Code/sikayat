@@ -47,7 +47,7 @@ class APIFeatures {
 
     console.log(page, limit, skip);
     this.query = this.query
-      .sort('createdAt')
+      .sort('-createdAt')
       .skip(skip)
       .limit(limit);
 
