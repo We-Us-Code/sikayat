@@ -1,11 +1,12 @@
 import React from "react";
 import "../styles/postItem.css"
+import "../styles/Card.css"
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
 
 const PostItem = (props) => {
   return (
     <div className="col">
-      <div className="card h-100">
+      <div className="card h-100 card-1">
         <img
           src="./logohome.webp"
           className="card-img-top"
