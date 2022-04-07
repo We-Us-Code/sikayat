@@ -16,12 +16,13 @@ const App = () => {
     <Router>
       <div>
         <NavBar />
-        <Routes>
-
-          <Route path="/" element={loggedIn ? <Post/>: <Login />} />
-          <Route path="/aboutus" element = {<AboutUs />} />
-          <Route path="/postdetails" element = {<PostDetails/>} />
-        </Routes>
+        <div style={{minHeight: "80vh"}}>
+          <Routes>
+            <Route path="/" element={loggedIn ? <Post/>: <Login />} />
+            <Route path="/aboutus" element = {<AboutUs />} />
+            <Route path="/postdetails" element = {<PostDetails/>} />
+          </Routes>
+        </div>
         <BottomBar />
       </div>
     </Router>
