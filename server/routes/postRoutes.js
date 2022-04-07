@@ -18,6 +18,10 @@ router
   .route('/:id')
   .get(postController.getPost)
   .patch(postController.updatePost)
-  .delete(postController.deletePost);
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    postController.deletePost
+  );
 
 module.exports = router;
