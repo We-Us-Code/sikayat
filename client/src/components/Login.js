@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../styles/Login.css";
 import { GoogleLogin } from "react-google-login";
 import { HOST } from "../constants";
 import axios from "axios";
+import loginContext from "./../context/login/loginContext";
 
 const Login = () => {
+  const contextLogin = useContext(loginContext);
+  const { setIsLoggedIn } = contextLogin;
+
   const responseSuccessGoogle = (response) => {
-    console.log(HOST);
 
     axios({
       method: "POST",
@@ -17,10 +20,10 @@ const Login = () => {
         tokenId: response.tokenId,
       },
     }).then((res) => {
-      console.log(res);
-    });
-
-    console.log(response);
+      if(res.status===200){
+          setIsLoggedIn("loggedin")
+      }
+    });;
   };
 
   const responseErrorGoogle = (response) => {
