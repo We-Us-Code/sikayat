@@ -3,7 +3,7 @@ import LoginContext from "./loginContext";
 
 const LoginState = (props) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState("loggedout");
+  const [isLoggedIn, setIsLoggedIn] = useState("unknown");
   //The value of isLogged In: 'unknown, loggedin, loggedout'
 
   return (
