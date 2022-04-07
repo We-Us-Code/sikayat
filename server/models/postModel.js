@@ -16,8 +16,14 @@ const postSchema = new mongoose.Schema(
       maxlength: [2000, 'A post body cannot have more than 2000 characters'],
       minLength: [10, 'A post body must have atleast 10 characters']
     },
-    upvotersId: [String],
-    downvotersId: [String],
+    upvotersId: {
+      type: [String],
+      default: []
+    },
+    downvotersId: {
+      type: [String],
+      default: []
+    },
     upvoteCount: {
       type: Number,
       default: 0
@@ -26,7 +32,10 @@ const postSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
-    images: [String],
+    images: {
+      type: [String],
+      default: []
+    },
     createdAt: {
       type: Date,
       default: Date.now()
@@ -35,7 +44,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A post must have a user ID']
     },
-    tags: [String]
+    tags: {
+      type: [String],
+      default: []
+    }
   },
   {
     toJSON: { virtuals: true },

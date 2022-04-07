@@ -4,6 +4,8 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.getAllPosts = catchAsync(async (req, res, next) => {
+  const totalPosts = await Post.countDocuments();
+
   const features = new APIFeatures(Post.find(), req.query)
     .filter()
     .sort()
@@ -15,6 +17,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     results: posts.length,
+    totalPosts: totalPosts,
     data: {
       posts
     }
