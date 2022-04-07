@@ -40,7 +40,7 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 
-exports.googlelogin = catchAsync(async (req, res, next) => {
+exports.googleLogin = catchAsync(async (req, res, next) => {
   const { tokenId } = req.body;
 
   client
@@ -78,8 +78,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
-
-  console.log(token);
 
   if (!token) {
     return next(
