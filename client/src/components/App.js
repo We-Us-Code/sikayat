@@ -34,6 +34,7 @@ const App = () => {
       }
     }
     getLoginStatus();
+    //eslint-disable-next-line
   }, [])
 
   return (
@@ -47,7 +48,7 @@ const App = () => {
               element={isLoggedIn === "loggedin" ? <Post /> : (isLoggedIn === 'loggedout' ? <Login /> : <Spinner />)}
             />
             <Route path="/aboutus" element={<AboutUs />} />
-            <Route path="/postdetails" element={<PostDetails />} />
+            <Route path="/postdetails/:id" element={<PostDetails />} />
           </Routes>
         </div>
         <BottomBar />

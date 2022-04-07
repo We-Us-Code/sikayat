@@ -4,6 +4,12 @@ import "../styles/Card.css"
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
 
 const PostItem = (props) => {
+
+  const handleUpvote = (e) => {
+    e.preventDefault();
+    console.log('upvote');
+  };
+
   return (
     <div className="col">
       <div className="card h-100 card-1">
@@ -14,7 +20,7 @@ const PostItem = (props) => {
           style={{ maxHeight: "350px" }}
         />
         <div className="card-body">
-          <i className="bi bi-caret-up-fill" style={{color:"green"}}></i> {props.post.upvoteCount}
+          <i className="bi bi-caret-up-fill" style={{color:"green"}} onClick={handleUpvote}></i> {props.post.upvoteCount}
           <i className="bi bi-caret-down-fill" style={{color:"grey", marginLeft:"10px"}}></i> {props.post.downvoteCount}
           <h5 className="card-title my-2">{props.post.heading}</h5>
           <div className="card-text">{props.post.body}</div>
