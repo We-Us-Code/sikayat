@@ -19,11 +19,13 @@ class APIFeatures {
   }
 
   sort() {
+    //BE SURE TO INCLUDE IDS, FOR CONSISTENCY
     if (this.queryString.sort) {
-      const sortBy = this.queryString.sort.split(',').join(' ');
+      let sortBy = this.queryString.sort.split(',').join(' ');
+      sortBy += ' _id';
       this.query = this.query.sort(sortBy);
     } else {
-      this.query = this.query.sort('-createdAt');
+      this.query = this.query.sort('-createdAt _id');
     }
 
     return this;
@@ -45,7 +47,6 @@ class APIFeatures {
     const limit = this.queryString.limit * 1 || 100;
     const skip = (page - 1) * limit;
 
-    console.log(page, limit, skip);
     this.query = this.query
       .sort('-createdAt')
       .skip(skip)
