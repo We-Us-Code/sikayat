@@ -45,7 +45,11 @@ class APIFeatures {
     const limit = this.queryString.limit * 1 || 100;
     const skip = (page - 1) * limit;
 
-    this.query = this.query.skip(skip).limit(limit);
+    console.log(page, limit, skip);
+    this.query = this.query
+      .sort('createdAt')
+      .skip(skip)
+      .limit(limit);
 
     return this;
   }
