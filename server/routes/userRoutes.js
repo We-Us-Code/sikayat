@@ -4,7 +4,12 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
-router.post('/googlelogin', authController.googlelogin);
+router.post('/googlelogin', authController.googleLogin);
+router.get(
+  '/is-logged-in',
+  authController.protect,
+  userController.getLogInStatus
+);
 
 router
   .route('/')

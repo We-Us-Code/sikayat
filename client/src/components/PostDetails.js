@@ -9,12 +9,10 @@ const PostDetails = () => {
     const posts = sampleResponse.data.posts;
 
     return (
-        <section className="vh-100">
-            <div className="container-fluid h-custom">
-                <div className="row d-flex justify-content-center align-items-center h-100">
-                    <PostItem key={posts[0]._id} post={posts[0]}/>
-                    <Comment />
-                </div>
+        <section className="min-vh-100">
+            <div class="row d-flex justify-content-center align-items-center mx-1">
+                <div class="col-sm-12 col-md-6 col-lg-4"><PostItem key={posts[0]._id} post={posts[0]} /></div>
+                <div class="col-sm-12 col-md-6 col-lg-7 mx-2"><Comment /></div>
             </div>
         </section>
     );
