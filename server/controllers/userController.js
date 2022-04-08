@@ -12,38 +12,27 @@ exports.getLogInStatus = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  // SEND RESPONSE
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users
-    }
-  });
-});
-
 exports.createUser = (req, res) => {
   res.status(500).json({
-    status: 'err or',
-    message: 'This route is not yet defined!'
-  });
-};
-
-exports.getUser = (req, res) => {
-  res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined!'
+    message: 'This route is not defined! Please use /googlelogin instead.'
   });
 };
 
 exports.updateUser = (req, res) => {
   res.status(500).json({
     status: 'error',
-    message: 'This route is not yet defined!'
+    message: 'This route is not defined! Please use /googlelogin instead.'
   });
 };
 
-exports.deleteUser = factory.deleteOne(User);
+exports.deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message:
+      'This route is not defined! You cannot delete a User. Please use /googlelogin instead.'
+  });
+};
+
+exports.getAllUsers = factory.getAll(User);
+exports.getUser = factory.getOne(User);

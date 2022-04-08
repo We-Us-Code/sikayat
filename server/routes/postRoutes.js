@@ -22,8 +22,8 @@ router
 
 router
   .route('/:id')
-  .get(postController.getPost)
-  .patch(postController.updatePost)
+  .get(authController.protect, postController.getPost)
+  .patch(authController.protect, postController.updatePost)
   .delete(
     authController.protect,
     authController.restrictTo('admin'),
