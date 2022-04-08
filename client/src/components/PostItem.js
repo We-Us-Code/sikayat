@@ -15,10 +15,10 @@ const PostItem = (props) => {
       <div className="card h-100 card-1">
         <div className="card-header ">
           <div className="row">
-            <div className="col-1">
-              <img src={props.post.user.photo} alt="UserLogo" className="circle_img" />
+            <div className="col-2">
+              <img src={props.post.user.photo} alt="UserLogo" className="circle_img" referrerPolicy="no-referrer"/>
             </div>
-            <div className="col-10 mx-3">
+            <div className="col-10">
               <h6 className="d-inline">{props.post.user.name}</h6>
               <br />
               <small>{(new Date(props.post.createdAt)).toLocaleString("ear-MA", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</small>
