@@ -18,8 +18,8 @@ const PostState = (props) => {
 
     //get all posts
     const getPosts = async () => {
-        const endpoint = `/api/v1/posts?page=${page}&limit=6`;
-        const GET_ALL_POSTS_ENDPOINT = `${HOST}${endpoint}`;
+        const ENDPOINT = `/api/v1/posts?page=${page}&limit=6`;
+        const GET_ALL_POSTS_ENDPOINT = `${HOST}${ENDPOINT}`;
         try {
             const response = await axios.get(GET_ALL_POSTS_ENDPOINT, {
                 withCredentials: true,

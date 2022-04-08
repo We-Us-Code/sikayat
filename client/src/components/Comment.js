@@ -1,7 +1,20 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import CommentItem from './CommentItem';
+import commentContext from "./../context/comment/commentContext";
+import Spinner from './Spinner';
 
-const Comment = () => {
+const Comment = (props) => {
+
+    const contextComment = useContext(commentContext);
+    const {  comments, getComments, loading, totalComments, resetToDefaultState } = contextComment;
+
+    useEffect(() => {
+      getComments(props.postId);
+      return () => {resetToDefaultState()};
+      //eslint-disable-next-line
+    }, [])
+    
+
     return (
         <div className="col" style={{ height: "100vh"  }} >
             <form className='my-3'>
@@ -11,15 +24,17 @@ const Comment = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Post Comment</button>
             </form>
-            <div  className='overflow-auto' style={{height: "70vh"}} >
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
+            <div  className='card overflow-auto' style={{height: "70vh"}} >
+                {
+                    loading? <Spinner/> : (
+                        totalComments===0 ? <p className='text-muted'>No comments</p> :
+                        comments.map( (comment)=>{
+                            return(
+                                <CommentItem key={comment._id} comment={comment} />
+                            )
+                        } ) 
+                    )
+                }
             </div>
         </div>
     )
