@@ -22,7 +22,7 @@ const PostDetails = (props) => {
         <section className="min-vh-100">
             <div className="row d-flex justify-content-center align-items-center mx-1">
                 <div className="col-sm-12 col-md-6 col-lg-4">{loading ? <Spinner /> : <PostItem key={post._id} post={post} />}</div>
-                <div className="col-sm-12 col-md-6 col-lg-7 mx-2"><Comment postId={id}/></div>
+                <div className="col-sm-12 col-md-6 col-lg-7 mx-2"><Comment /></div>
             </div>
         </section>
     );

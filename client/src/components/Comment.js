@@ -1,15 +1,19 @@
 import React, {useContext, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import CommentItem from './CommentItem';
 import commentContext from "./../context/comment/commentContext";
 import Spinner from './Spinner';
+import AddNewComment from './AddNewComment';
 
-const Comment = (props) => {
+const Comment = () => {
 
     const contextComment = useContext(commentContext);
-    const {  comments, getComments, loading, totalComments, resetToDefaultState } = contextComment;
+    const { comments, getComments, loading, totalComments, resetToDefaultState } = contextComment;
+
+    const {id} = useParams();
 
     useEffect(() => {
-      getComments(props.postId);
+      getComments(id);
       return () => {resetToDefaultState()};
       //eslint-disable-next-line
     }, [])
@@ -17,13 +21,14 @@ const Comment = (props) => {
 
     return (
         <div className="col" style={{ height: "100vh"  }} >
-            <form className='my-3'>
+            {/* <form className='my-3'>
                 <div className="mb-3">
                     <label htmlFor="comment" className="form-label">Write a comment!</label>
                     <input type="text" className="form-control" id="comment" />
                 </div>
                 <button type="submit" className="btn btn-primary">Post Comment</button>
-            </form>
+            </form> */}
+            <AddNewComment />
             <div  className='card overflow-auto' style={{height: "70vh"}} >
                 {
                     loading? <Spinner/> : (
