@@ -31,7 +31,7 @@ const PostItem = (props) => {
           }
           <p className="card-text ">
             <small className="text-muted">
-              {timeDifferenceForDate(props.post.createdAt)} by Sushant Kumar
+              {timeDifferenceForDate(props.post.createdAt)} by {props.post.user.name}
             </small>
           </p>
         </div>

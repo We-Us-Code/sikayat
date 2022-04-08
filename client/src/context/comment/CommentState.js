@@ -29,7 +29,7 @@ const CommentState = (props) => {
                 withCredentials: true,
                 credentials: "include"
             });
-            const updatedComments = response.data.data.comments;
+            const updatedComments = response.data.data.data;
             const updatedTotalComments = response.data.results;
             setComments(updatedComments);
             setTotalComments(updatedTotalComments);
@@ -48,8 +48,11 @@ const CommentState = (props) => {
             credentials: "include",
           }).then((res) => {
             //API RETURNS MISMATCH JSON, FOR NOW FORCING RELOAD, LATER MUST ADD THE COMMENT RETURNED IN RESPONSE TO "comments" STATE
-            resetToDefaultState(); 
-            window.location.reload(false); //RELOAD
+            // resetToDefaultState(); 
+            // window.location.reload(false); //RELOAD
+            const newComments = [res.data.data.comment, ...comments];
+            setComments(newComments);
+            setTotalComments(totalComments+1);
           }).catch((err) => {
             console.log(err);
           })        

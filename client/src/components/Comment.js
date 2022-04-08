@@ -21,13 +21,6 @@ const Comment = () => {
 
     return (
         <div className="col" style={{ height: "100vh"  }} >
-            {/* <form className='my-3'>
-                <div className="mb-3">
-                    <label htmlFor="comment" className="form-label">Write a comment!</label>
-                    <input type="text" className="form-control" id="comment" />
-                </div>
-                <button type="submit" className="btn btn-primary">Post Comment</button>
-            </form> */}
             <AddNewComment />
             <div  className='card overflow-auto' style={{height: "70vh"}} >
                 {

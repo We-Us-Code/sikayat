@@ -31,7 +31,7 @@ const PostDetailsState = (props) => {
                 withCredentials: true,
                 credentials: "include"
             });
-            let updatedPost = response.data.data.post;
+            let updatedPost = response.data.data.data;
             setPost(updatedPost);
             setLoading(false);
         } catch (error) {
