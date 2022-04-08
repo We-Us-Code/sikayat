@@ -3,14 +3,16 @@ import PostItem from "./PostItem";
 import postContext from "../context/post/postContext";
 import InfiniteScroll from "react-infinite-scroll-component"
 import {Link} from "react-router-dom";
+import Spinner from "./Spinner"
 
 const Post = () => {
 
   const contextPost = useContext(postContext);
-  const { posts, getPosts, totalPosts } = contextPost;
+  const { posts, getPosts, totalPosts,  resetToDefaultState } = contextPost;
 
   useEffect(() => {
     getPosts();
+    return () => {resetToDefaultState()};
     //eslint-disable-next-line
   }, [])
 
@@ -20,10 +22,10 @@ const Post = () => {
       dataLength={posts.length} //This is important field to render the next data
       next={getPosts}
       hasMore={posts.length !== totalPosts}
-      loader={<h4>Loading...</h4>}
+      loader={<Spinner />}
       endMessage={
-        <p style={{ textAlign: 'center' }}>
-          <b>Read all complaints</b>
+        <p className="lead my-4" style={{ textAlign: 'center' }}>
+          Yayy! You have seen it all!!!
         </p>
       }
       scrollThreshold ={0.95}

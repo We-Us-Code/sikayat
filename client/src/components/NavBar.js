@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import loginContext from "./../context/login/loginContext";
 
 const NavBar = () => {
+  const contextLogin = useContext(loginContext);
+  const { isLoggedIn } = contextLogin;
+
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -35,9 +40,11 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
-          <Link to ="/addnew" >
-            <button className="btn btn-outline-success my-2 my-sm-0">Add New</button>
-          </Link>
+          {
+            (isLoggedIn==="loggedin") && <Link to="/addnew" >
+              <button className="btn btn-outline-success my-2 my-sm-0">Add New</button>
+            </Link>
+          }
         </div>
       </div>
     </nav>
