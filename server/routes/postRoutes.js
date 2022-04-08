@@ -15,19 +15,17 @@ router.use('/:postId/comments', commentRouter);
 
 // Aliasing Route to be added here whenever needed
 
+router.use(authController.protect);
+
 router
   .route('/')
-  .get(authController.protect, postController.getAllPosts)
-  .post(authController.protect, postController.createPost);
+  .get(postController.getAllPosts)
+  .post(postController.createPost);
 
 router
   .route('/:id')
-  .get(authController.protect, postController.getPost)
-  .patch(authController.protect, postController.updatePost)
-  .delete(
-    authController.protect,
-    authController.restrictTo('admin'),
-    postController.deletePost
-  );
+  .get(postController.getPost)
+  .patch(postController.updatePost)
+  .delete(postController.deletePost);
 
 module.exports = router;

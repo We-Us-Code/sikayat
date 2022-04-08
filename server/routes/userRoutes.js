@@ -5,21 +5,21 @@ const authController = require('./../controllers/authController');
 const router = express.Router();
 
 router.post('/googlelogin', authController.googleLogin);
-router.get(
-  '/is-logged-in',
-  authController.protect,
-  userController.getLogInStatus
-);
+
+router.use(authController.protect);
+
+router.get('/is-logged-in', userController.getLogInStatus);
+router.get('/me', userController.getMe, userController.getUser);
 
 router
   .route('/')
-  .get(authController.protect, userController.getAllUsers)
-  .post(authController.protect, userController.createUser);
+  .get(userController.getAllUsers)
+  .post(userController.createUser);
 
 router
   .route('/:id')
-  .get(authController.protect, userController.getUser)
-  .patch(authController.protect, userController.updateUser)
-  .delete(authController.protect, userController.deleteUser);
+  .get(userController.getUser)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
 
 module.exports = router;

@@ -8,14 +8,16 @@ const router = express.Router({ mergeParams: true });
 //GET /post/23933992fg/comments
 // POST /reviews
 
+router.use(authController.protect);
+
 router
   .route('/')
-  .get(authController.protect, commentController.getAllComments)
-  .post(authController.protect, commentController.createComment);
+  .get(commentController.getAllComments)
+  .post(commentController.createComment);
 
 router
   .route('/:id')
-  .get(authController.protect, commentController.getComment)
-  .patch(authController.protect, commentController.updateComment)
-  .delete(authController.protect, commentController.deleteComment);
+  .get(commentController.getComment)
+  .patch(commentController.updateComment)
+  .delete(commentController.deleteComment);
 module.exports = router;
