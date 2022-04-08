@@ -19,6 +19,7 @@ class APIFeatures {
   }
 
   sort() {
+    //BE SURE TO INCLUDE IDS, FOR CONSISTENCY
     if (this.queryString.sort) {
       let sortBy = this.queryString.sort.split(',').join(' ');
       sortBy += ' _id';

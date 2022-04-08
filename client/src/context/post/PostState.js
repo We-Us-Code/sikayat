@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PostContext from "./postContext";
-import sampleResponse from "../../temporaryData";
 import {HOST} from "../../constants";
 import axios from "axios";
 
@@ -8,7 +7,14 @@ const PostState = (props) => {
 
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
-    const [totalPosts, setTotalPosts] = useState(sampleResponse.data.posts.length);
+    const [totalPosts, setTotalPosts] = useState(0);
+
+    //set default state
+    const resetToDefaultState = () => {
+        setPosts([]);
+        setPage(1);
+        setTotalPosts(0);
+    }
 
     //get all posts
     const getPosts = async () => {
@@ -31,7 +37,7 @@ const PostState = (props) => {
 
     return (
         <PostContext.Provider
-            value={{ posts, getPosts, totalPosts }}
+            value={{ posts, getPosts, totalPosts, resetToDefaultState }}
         >
             {props.children}
         </PostContext.Provider>
