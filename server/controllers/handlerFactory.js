@@ -85,7 +85,7 @@ exports.getAll = Model =>
     res.status(200).json({
       status: 'success',
       results: doc.length,
-      totalDocuements: totalDocuments,
+      totalDocuments: totalDocuments,
       data: {
         data: doc
       }
