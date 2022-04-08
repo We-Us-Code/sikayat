@@ -2,6 +2,7 @@ const Post = require('./../models/postModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./handlerFactory');
 
 exports.getAllPosts = catchAsync(async (req, res, next) => {
   const totalPosts = await Post.countDocuments();
@@ -25,7 +26,7 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
 });
 
 exports.getPost = catchAsync(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id).populate('comments');
 
   if (!post) {
     return next(new AppError('No post found with that ID', 404));
@@ -73,15 +74,17 @@ exports.updatePost = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deletePost = catchAsync(async (req, res, next) => {
-  const post = await Post.findByIdAndDelete(req.params.id);
+exports.deletePost = factory.deleteOne(Post);
 
-  if (!post) {
-    return next(new AppError('No post found with that ID', 404));
-  }
+// exports.deletePost = catchAsync(async (req, res, next) => {
+//   const post = await Post.findByIdAndDelete(req.params.id);
 
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});
+//   if (!post) {
+//     return next(new AppError('No post found with that ID', 404));
+//   }
+
+//   res.status(204).json({
+//     status: 'success',
+//     data: null
+//   });
+// });

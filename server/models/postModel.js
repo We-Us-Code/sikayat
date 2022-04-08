@@ -40,12 +40,10 @@ const postSchema = new mongoose.Schema(
       type: Date,
       default: Date.now()
     },
-    user: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
-      }
-    ],
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User'
+    },
     tags: {
       type: [String],
       default: []
@@ -56,6 +54,14 @@ const postSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+// VIRTUAL POPULATE
+
+postSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'post',
+  localField: '_id'
+});
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
 
@@ -75,7 +81,7 @@ postSchema.pre(/^find/, function(next) {
 postSchema.pre(/^find/, function(next) {
   this.populate({
     path: 'user',
-    select: '-__v -email'
+    select: 'name photo'
   });
   next();
 });
