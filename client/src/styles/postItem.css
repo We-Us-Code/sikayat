@@ -1,3 +1,15 @@
 i {
     cursor: pointer;
 }
+
+.circle_img {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 0px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    margin: 0px;
+  }
