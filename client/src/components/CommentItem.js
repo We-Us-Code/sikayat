@@ -5,7 +5,7 @@ const CommentItem = (props) => {
     const comment = props.comment;
 
     return (
-        <div className="card mb-3">
+        <div className="card card-shadow mb-3 my-1 mx-2">
             <div className="card-body">
                 <p className="card-text">{comment.comment}</p>
                 <p className="card-text"><small className="text-muted">{timeDifferenceForDate(comment.createdAt)} by {comment.user.name}</small></p>

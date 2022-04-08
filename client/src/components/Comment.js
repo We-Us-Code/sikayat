@@ -22,10 +22,10 @@ const Comment = () => {
     return (
         <div className="col" style={{ height: "100vh"  }} >
             <AddNewComment />
-            <div  className='card overflow-auto' style={{height: "70vh"}} >
+            <div  className='card card-shadow overflow-auto' style={{height: "70vh"}} >
                 {
                     loading? <Spinner/> : (
-                        totalComments===0 ? <p className='text-muted'>No comments</p> :
+                        totalComments===0 ? <p className='text-muted my-4' style={{ textAlign: 'center' }}>No comments</p> :
                         comments.map( (comment)=>{
                             return(
                                 <CommentItem key={comment._id} comment={comment} />

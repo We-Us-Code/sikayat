@@ -23,12 +23,12 @@ const AddNewComment = () => {
       }
 
     return (
-        <form className='my-3'>
-            <div className="mb-3">
+        <form className='my-2'>
+            <div className="mb-3 my-2 mx-2">
                 <label htmlFor="comment" className="form-label">Write a comment!</label>
                 <input type="text" className="form-control" id="comment" value={currentComment.comment} name='comment' onChange={handleChange}/>
             </div>
-            <button type="submit" className="btn btn-primary" onClick={handleClick}>Post Comment</button>
+            <button type="submit" className="btn btn-primary my-2 mx-2" onClick={handleClick}>Post Comment</button>
         </form>
     )
 }
