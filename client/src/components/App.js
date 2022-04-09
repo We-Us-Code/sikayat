@@ -26,8 +26,10 @@ const App = () => {
           withCredentials: true,
           credentials: "include"
         });
-        if (response.data.status === 'success')
+        if (response.data.status === 'success'){
+          localStorage.setItem("loggedInUserId", response.data.user);
           setIsLoggedIn('loggedin')
+        }
         else
           setIsLoggedIn('loggedout')
       } catch (err) {

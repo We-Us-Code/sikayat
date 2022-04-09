@@ -22,6 +22,7 @@ const Login = () => {
     }).then((res) => {
       if(res.status===200){
           setIsLoggedIn("loggedin")
+          localStorage.setItem("loggedInUserId", res.data.data.user._id);
       }
     });;
   };

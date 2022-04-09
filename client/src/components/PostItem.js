@@ -10,13 +10,17 @@ const PostItem = (props) => {
     console.log('upvote');
   };
 
+  const handleDeletePost = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div className="col">
       <div className="card h-100 card-1">
         <div className="card-header ">
           <div className="row">
             <div className="col-2">
-              <img src={props.post.user.photo} alt="UserLogo" className="circle_img" referrerPolicy="no-referrer"/>
+              <img src={props.post.user.photo} alt="UserLogo" className="circle_img" referrerPolicy="no-referrer" />
             </div>
             <div className="col-10">
               <h6 className="d-inline">{props.post.user.name}</h6>
@@ -26,14 +30,20 @@ const PostItem = (props) => {
           </div>
         </div>
         <img
-          src="https://raw.githubusercontent.com/harshsingh-24/cmp/main/client/public/logohome.webp?token=GHSAT0AAAAAABSOMNX7TZXTDBFTCGW6HSL4YSQPTPQ"
+          src="./logohome.webp"
           className="card-img-top"
           alt="postLogo"
           style={{ maxHeight: "350px" }}
         />
         <div className="card-body">
-          <i className="bi bi-caret-up-fill" style={{ color: "green" }} onClick={handleUpvote}></i> {props.post.upvoteCount}
-          <i className="bi bi-caret-down-fill" style={{ color: "grey", marginLeft: "10px" }}></i> {props.post.downvoteCount}
+          <div className="d-flex justify-content-between">
+            <div>
+              <i className="bi bi-caret-up-fill" style={{ color: "green" }} onClick={handleUpvote}></i> {props.post.upvoteCount}
+              <i className="bi bi-caret-down-fill" style={{ color: "grey", marginLeft: "10px" }}></i> {props.post.downvoteCount}
+            </div>
+            {localStorage.getItem("loggedInUserId") === props.post.user._id &&
+              <i className="bi bi-trash" style={{ color: "#a30505" }} onClick={handleDeletePost}></i>}
+          </div>
           <h5 className="card-title my-2">{props.post.heading}</h5>
           <div className="card-text">{props.post.body}</div>
           {
