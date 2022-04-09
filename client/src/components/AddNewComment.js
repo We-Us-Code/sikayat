@@ -11,7 +11,6 @@ const AddNewComment = () => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log('adding a comment');
         AddNewComment(id);
     }
 
@@ -28,7 +27,7 @@ const AddNewComment = () => {
                 <label htmlFor="comment" className="form-label">Write a comment!</label>
                 <input type="text" className="form-control" id="comment" value={currentComment.comment} name='comment' onChange={handleChange}/>
             </div>
-            <button type="submit" className="btn btn-primary my-2 mx-2" onClick={handleClick}>Post Comment</button>
+            <button disabled={currentComment.comment.length<1||currentComment.comment.length>300} type="submit" className="btn btn-primary my-2 mx-2" onClick={handleClick}>Post Comment</button>
         </form>
     )
 }

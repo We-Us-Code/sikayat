@@ -46,21 +46,39 @@ const CommentState = (props) => {
         axios.post(ADD_NEW_COMMENT_ENDPOINT, currentComment, {
             withCredentials: true,
             credentials: "include",
-          }).then((res) => {
-            //API RETURNS MISMATCH JSON, FOR NOW FORCING RELOAD, LATER MUST ADD THE COMMENT RETURNED IN RESPONSE TO "comments" STATE
-            // resetToDefaultState(); 
-            // window.location.reload(false); //RELOAD
+        }).then((res) => {
             const newComments = [res.data.data.comment, ...comments];
             setComments(newComments);
-            setTotalComments(totalComments+1);
-          }).catch((err) => {
+            setTotalComments(totalComments + 1);
+            setCurrentComment(DEFAULT_COMMENT_STATE);
+        }).catch((err) => {
             console.log(err);
-          })        
+        })
+    }
+
+    const deleteComment = async (commentId) => {
+        const ENDPOINT = `/api/v1/comments/${commentId}`;
+        const DELETE_COMMENT_ENDPOINT = `${HOST}${ENDPOINT}`;
+
+        axios.delete(DELETE_COMMENT_ENDPOINT, {
+            withCredentials: true,
+            credentials: "include",
+        }).then((res) => {
+            if(res.status === 204) {
+                const updatedComments = comments.filter( (comment)=>{
+                    return comment._id !== commentId;
+                } )
+                setComments(updatedComments);
+                setTotalComments(totalComments-1);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
     return (
         <CommentContext.Provider
-            value={{ comments, getComments, totalComments, loading, currentComment, setCurrentComment, AddNewComment, resetToDefaultState  }}
+            value={{ comments, getComments, totalComments, loading, currentComment, setCurrentComment, AddNewComment, deleteComment, resetToDefaultState }}
         >
             {props.children}
         </CommentContext.Provider>
