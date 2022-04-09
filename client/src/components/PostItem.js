@@ -1,18 +1,86 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import "../styles/postItem.css"
 import "../styles/Card.css"
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
 import postContext from "../context/post/postContext";
+import { HOST } from "../constants";
+import axios from "axios";
+import alertContext from "../context/alert/alertContext";
 
 const PostItem = (props) => {
 
   const contextPost = useContext(postContext);
   const { deletePost } = contextPost;
 
-  const handleUpvote = (e) => {
+  const contextAlert = useContext(alertContext);
+  const { showAlert } = contextAlert;
+
+  const [upvoted, setUpvoted] = useState(props.post.upvoters.includes(localStorage.getItem("loggedInUserId")));
+  const [downvoted, setDownvoted] = useState(props.post.downvoters.includes(localStorage.getItem("loggedInUserId")));
+  const [upvoteCount, setUpvoteCount] = useState(props.post.upvoteCount);
+  const [downvoteCount, setDownvoteCount] = useState(props.post.downvoteCount);
+
+  const handleUpvote = async(e) => {
     e.preventDefault();
-    console.log('upvote');
+    const ENDPOINT = `/api/v1/posts/${props.post._id}/upvote`;
+    const UPVOTE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
+    try {
+      const response = await axios.patch(UPVOTE_POST_ENDPOINT, {}, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      if(response.status === 201) {
+        if(response.data.message==="addedUpvote") {
+          setUpvoted(true);
+          setUpvoteCount(upvoteCount+1);
+          if(downvoted) {
+            setDownvoted(false);
+            setDownvoteCount(downvoteCount-1);
+          }
+        } else {
+          setUpvoted(false);
+          setUpvoteCount(upvoteCount-1);
+        }        
+      } else {
+        console.log("failed to upvote post, post might be deleted?");
+        showAlert("danger", "Failed to upvote, post might be deleted!");
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert("danger", "Something went wrong");
+    }
   };
+
+  const handleDownvote = async(e) => {
+    e.preventDefault();
+    const ENDPOINT = `/api/v1/posts/${props.post._id}/downvote`;
+    const DOWNVOTE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
+    try {
+      const response = await axios.patch(DOWNVOTE_POST_ENDPOINT, {}, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      if(response.status === 201) {
+        if(response.data.message==="addedDownvote") {
+          setDownvoted(true);
+          setDownvoteCount(downvoteCount+1);
+          if(upvoted) {
+            setUpvoted(false);
+            setUpvoteCount(upvoteCount-1);
+          }
+        } else {
+          setDownvoted(false);
+          setDownvoteCount(downvoteCount-1);
+        }        
+      } else {
+        console.log("failed to downvote post, post might be deleted?");
+        showAlert("danger", "Failed to downvote, post might be deleted!");
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert("danger", "Something went wrong");
+    }
+  }
 
   const handleDeletePost = (e) => {
     e.preventDefault();
@@ -43,8 +111,8 @@ const PostItem = (props) => {
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <div>
-              <i className="bi bi-caret-up-fill" style={{ color: "green" }} onClick={handleUpvote}></i> {props.post.upvoteCount}
-              <i className="bi bi-caret-down-fill" style={{ color: "grey", marginLeft: "10px" }}></i> {props.post.downvoteCount}
+              <i className="bi bi-caret-up-fill" style={{ color: upvoted?"green":"grey" }} onClick={handleUpvote}></i> {upvoteCount}
+              <i className="bi bi-caret-down-fill" style={{ color: downvoted?"red":"grey", marginLeft: "10px" }} onClick={handleDownvote}></i> {downvoteCount}
             </div>
             {localStorage.getItem("loggedInUserId") === props.post.user._id &&
               <i className="bi bi-trash" style={{ color: "#a30505" }} onClick={handleDeletePost}></i>}
