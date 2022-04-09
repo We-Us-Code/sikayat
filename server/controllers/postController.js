@@ -37,7 +37,8 @@ exports.createPost = catchAsync(async (req, res, next) => {
   const createdPost = {
     heading: req.body.heading,
     body: req.body.body,
-    user: req.user._id
+    user: req.user._id,
+    images: req.body.images
   };
   const newPost = await Post.create(createdPost);
 
