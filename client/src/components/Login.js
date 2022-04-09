@@ -4,10 +4,13 @@ import { GoogleLogin } from "react-google-login";
 import { HOST } from "../constants";
 import axios from "axios";
 import loginContext from "./../context/login/loginContext";
+import alertContext from "./../context/alert/alertContext"
 
 const Login = () => {
   const contextLogin = useContext(loginContext);
   const { setIsLoggedIn } = contextLogin;
+  const contextAlert = useContext(alertContext);
+  const { showAlert } = contextAlert;
 
   const responseSuccessGoogle = (response) => {
 
@@ -23,6 +26,9 @@ const Login = () => {
       if(res.status===200){
           setIsLoggedIn("loggedin")
           localStorage.setItem("loggedInUserId", res.data.data.user._id);
+          showAlert("success", "Logged-In Successfully")
+      }else{
+        showAlert("danger", "Something went wrong")
       }
     });;
   };

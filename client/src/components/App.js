@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { HOST } from "../constants";
 import AddNewPost from "./AddNewPost";
+import Alert from "./Alert";
 
 const App = () => {
   const contextLogin = useContext(loginContext);
@@ -43,6 +44,7 @@ const App = () => {
   return (
       <div>
         <NavBar />
+        <Alert />
         <div style={{ minHeight: "80vh" }}>
           <Routes>
             <Route

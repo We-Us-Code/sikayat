@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PostContext from "./postContext";
 import { HOST } from "../../constants";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import alertContext from "./../alert/alertContext";
 
 const PostState = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const contextAlert = useContext(alertContext);
+  const { showAlert } = contextAlert;
 
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
@@ -51,11 +55,14 @@ const PostState = (props) => {
       if (response.status === 204) {
         if (location.pathname === "/") window.location.reload();
         else navigate("/");
+        showAlert("success", "Post Deleted Successfully");
       } else {
         console.log("Something went wrong!!!, couldn't delete");
+        showAlert("danger", "Something went wrong");
       }
     } catch (error) {
       console.error(error);
+      showAlert("danger", "Something went wrong");
     }
   };
 
