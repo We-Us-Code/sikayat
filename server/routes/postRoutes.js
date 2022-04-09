@@ -1,6 +1,7 @@
 const express = require('express');
 const postController = require('./../controllers/postController');
 const authController = require('./../controllers/authController');
+const voteController = require('./../controllers/voteController');
 const commentRouter = require('./../routes/commentRoutes');
 
 const router = express.Router();
@@ -27,5 +28,8 @@ router
   .get(postController.getPost)
   .patch(postController.updatePost)
   .delete(postController.deletePost);
+
+router.route('/:postId/upvote').patch(voteController.upvotePost);
+router.route('/:postId/downvote').patch(voteController.downvotePost);
 
 module.exports = router;

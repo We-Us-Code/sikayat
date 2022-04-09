@@ -16,29 +16,15 @@ const postSchema = new mongoose.Schema(
       maxlength: [2000, 'A post body cannot have more than 2000 characters'],
       minLength: [10, 'A post body must have atleast 10 characters']
     },
-    upvotersId: {
-      type: [String],
-      default: []
-    },
-    downvotersId: {
-      type: [String],
-      default: []
-    },
-    upvoteCount: {
-      type: Number,
-      default: 0
-    },
-    downvoteCount: {
-      type: Number,
-      default: 0
-    },
     images: {
       type: [String],
       default: []
     },
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: () => {
+        return Date.now();
+      }
     },
     user: {
       type: mongoose.Schema.ObjectId,
@@ -47,13 +33,38 @@ const postSchema = new mongoose.Schema(
     tags: {
       type: [String],
       default: []
-    }
+    },
+    upvoters: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ],
+    downvoters: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
   }
 );
+
+// INDEXING
+postSchema.index({ downvoters: 1 });
+postSchema.index({ upvoters: 1 });
+
+// VIRTUAL FIELDS
+postSchema.virtual('upvoteCount').get(function() {
+  return this.upvoters.length;
+});
+
+postSchema.virtual('downvoteCount').get(function() {
+  return this.downvoters.length;
+});
 
 // VIRTUAL POPULATE
 
@@ -63,14 +74,7 @@ postSchema.virtual('comments', {
   localField: '_id'
 });
 
-// DOCUMENT MIDDLEWARE: runs before .save() and .create()
-
-// Embedding the data inside document
-// postSchema.pre('save', async function(next) {
-//   const userPromises = this.user.map(async id => await User.findById(id));
-//   this.user = await Promise.all(userPromises);
-//   next();
-// });
+// VIRTUAL FIELDS
 
 // QUERY MIDDLEWARE
 postSchema.pre(/^find/, function(next) {
@@ -87,6 +91,7 @@ postSchema.pre(/^find/, function(next) {
 });
 
 postSchema.post(/^find/, function(docs, next) {
+  //eslint-disable-next-line
   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
   next();
 });

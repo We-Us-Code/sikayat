@@ -11,7 +11,9 @@ const commentSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: () => {
+        return Date.now();
+      }
     },
     post: {
       type: mongoose.Schema.ObjectId,
