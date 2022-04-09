@@ -14,6 +14,7 @@ const AddNewPost = () => {
 
   const [currPost, setCurrPost] = useState(DEFAULT_STATE);
 
+  const btnDisabled = currPost.heading.length<10||currPost.heading.length>100||currPost.body.length<10||currPost.body.length>2000;
 
   //Doing it here because it is almost isolated function:
   const addNewPost = (e) => {
@@ -78,7 +79,7 @@ const AddNewPost = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <button className="btn btn-success my-2" onClick={addNewPost}>
+            <button className="btn btn-success my-2" onClick={addNewPost} disabled={btnDisabled}>
               Add now
             </button>
           </form>
