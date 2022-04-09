@@ -4,8 +4,7 @@ import loginContext from "./../context/login/loginContext";
 
 const NavBar = () => {
   const contextLogin = useContext(loginContext);
-  const { isLoggedIn } = contextLogin;
-
+  const { isLoggedIn, logOut } = contextLogin;
 
   return (
     <nav
@@ -40,11 +39,18 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
-          {
-            (isLoggedIn==="loggedin") && <Link to="/addnew" >
-              <button className="btn btn-outline-success my-2 my-sm-0">Add New</button>
+          {isLoggedIn === "loggedin" && (
+            <Link to="/addnew"  style={{ color:"inherit", textDecoration:"inherit" }}>
+              <button className="btn btn-outline-success my-2 my-sm-2 mx-2 d-block">
+                Add New
+              </button>
             </Link>
-          }
+          )}
+          {isLoggedIn === "loggedin" && (
+            <button className="btn btn-outline-danger my-2 my-sm-2 mx-2 d-block" onClick={logOut}>
+              Log out
+            </button>
+          )}
         </div>
       </div>
     </nav>
