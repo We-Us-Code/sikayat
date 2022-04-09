@@ -1,7 +1,7 @@
 import "../styles/App.css";
 import React, { useContext } from "react";
 import NavBar from "./NavBar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Post from "./Post";
 import Login from "./Login";
 import BottomBar from "./BottomBar";
@@ -41,7 +41,6 @@ const App = () => {
   }, [])
 
   return (
-    <Router>
       <div>
         <NavBar />
         <div style={{ minHeight: "80vh" }}>
@@ -59,7 +58,6 @@ const App = () => {
         </div>
         <BottomBar />
       </div>
-    </Router>
   );
 };
 

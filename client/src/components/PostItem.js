@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../styles/postItem.css"
 import "../styles/Card.css"
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
+import postContext from "../context/post/postContext";
 
 const PostItem = (props) => {
+
+  const contextPost = useContext(postContext);
+  const { deletePost } = contextPost;
 
   const handleUpvote = (e) => {
     e.preventDefault();
@@ -12,6 +16,7 @@ const PostItem = (props) => {
 
   const handleDeletePost = (e) => {
     e.preventDefault();
+    deletePost(props.post._id);
   }
 
   return (

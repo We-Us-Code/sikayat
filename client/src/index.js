@@ -3,21 +3,24 @@ import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "./components/App";
 import LoginState from "./context/login/LoginState";
-import PostState from "./context/post/PostState"
+import PostState from "./context/post/PostState";
 import PostDetailsState from "./context/postDetails/PostDetailsState";
 import CommentState from "./context/comment/CommentState";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CommentState>
-    <PostState>
-    <PostDetailsState>
-    <LoginState>
-      <App />
-    </LoginState>
-    </PostDetailsState>
-    </PostState>
-    </CommentState>
+    <Router>
+      <CommentState>
+        <PostState>
+          <PostDetailsState>
+            <LoginState>
+              <App />
+            </LoginState>
+          </PostDetailsState>
+        </PostState>
+      </CommentState>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
