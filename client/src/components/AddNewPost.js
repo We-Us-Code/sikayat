@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../styles/Card.css";
 import axios from "axios";
 import { HOST } from "../constants";
 import { useNavigate } from "react-router-dom";
+import alertContext from "../context/alert/alertContext";
 
 const AddNewPost = () => {
   const navigate = useNavigate();
+
+  const contextAlert = useContext(alertContext);
+  const { showAlert } = contextAlert;
 
   const DEFAULT_STATE = {
     heading: "",
@@ -28,8 +32,10 @@ const AddNewPost = () => {
     }).then((post) => {
       setCurrPost(DEFAULT_STATE);
       navigate("/");
+      showAlert("success", "Complaint Added Successfully")
     }).catch((err) => {
       console.log(err);
+      showAlert("danger", "Something went wrong...")
     })
 
   };
