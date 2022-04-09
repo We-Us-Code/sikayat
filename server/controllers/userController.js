@@ -8,7 +8,8 @@ exports.getLogInStatus = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    message: 'User is Logged In!'
+    message: 'User is Logged In!',
+    user: req.user.id
   });
 });
 
