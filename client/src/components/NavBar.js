@@ -41,13 +41,13 @@ const NavBar = () => {
           </ul>
           {isLoggedIn === "loggedin" && (
             <Link to="/addnew"  style={{ color:"inherit", textDecoration:"inherit" }}>
-              <button className="btn btn-outline-success my-2 my-sm-2 mx-2 d-block">
+              <button className="btn btn-outline-success my-2 my-lg-0 mx-2 d-block">
                 Add New
               </button>
             </Link>
           )}
           {isLoggedIn === "loggedin" && (
-            <button className="btn btn-outline-danger my-2 my-sm-2 mx-2 d-block" onClick={logOut}>
+            <button className="btn btn-outline-danger my-2 my-lg-0 mx-2 d-block" onClick={logOut}>
               Log out
             </button>
           )}

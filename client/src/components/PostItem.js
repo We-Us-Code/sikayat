@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import "../styles/postItem.css"
 import "../styles/Card.css"
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
@@ -6,8 +6,11 @@ import postContext from "../context/post/postContext";
 import { HOST } from "../constants";
 import axios from "axios";
 import alertContext from "../context/alert/alertContext";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 const PostItem = (props) => {
+  const PLACEHOLDER_IMAGE_URL = "https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/logohome.webp?alt=media&token=197099a7-3a59-4d08-bb6e-fa112c8d9a9d";
 
   const contextPost = useContext(postContext);
   const { deletePost } = contextPost;
@@ -19,6 +22,12 @@ const PostItem = (props) => {
   const [downvoted, setDownvoted] = useState(props.post.downvoters.includes(localStorage.getItem("loggedInUserId")));
   const [upvoteCount, setUpvoteCount] = useState(props.post.upvoteCount);
   const [downvoteCount, setDownvoteCount] = useState(props.post.downvoteCount);
+
+  useEffect(()=>{
+    if(props.post.images.length===0)
+      props.post.images.push(PLACEHOLDER_IMAGE_URL);
+      //eslint-disable-next-line
+  }, [])
 
   const handleUpvote = async(e) => {
     e.preventDefault();
@@ -101,14 +110,22 @@ const PostItem = (props) => {
               <small>{(new Date(props.post.createdAt)).toLocaleString("ear-MA", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</small>
             </div>
           </div>
-        </div>
-        <img
-          src="./logohome.webp"
-          className="card-img-top"
-          alt="postLogo"
-          style={{ maxHeight: "350px" }}
-        />
+        </div>      
         <div className="card-body">
+          <div onClick={(e)=>{e.preventDefault()}}>
+          <Carousel>
+            {props.post.images.map((imgUrl) => (
+              <div className="carousel-item active" key={imgUrl}>
+                <img
+                  src={imgUrl}
+                  className="card-img-top"
+                  alt="postLogo"
+                  style={{ maxHeight: "350px" }}
+                />
+              </div>
+            ))}
+          </Carousel>
+          </div>
           <div className="d-flex justify-content-between">
             <div>
               <i className="bi bi-caret-up-fill" style={{ color: upvoted?"green":"grey" }} onClick={handleUpvote}></i> {upvoteCount}

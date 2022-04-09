@@ -4,6 +4,9 @@ import axios from "axios";
 import { HOST } from "../constants";
 import { useNavigate } from "react-router-dom";
 import alertContext from "../context/alert/alertContext";
+import { storage } from "../utils/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import imageCompression from "browser-image-compression";
 
 const AddNewPost = () => {
   const navigate = useNavigate();
@@ -13,39 +16,105 @@ const AddNewPost = () => {
 
   const DEFAULT_STATE = {
     heading: "",
-    body: "",
+    body: ""
   };
 
   const [currPost, setCurrPost] = useState(DEFAULT_STATE);
+  const [imageDataFiles, setImageDataFiles] = useState([]);
 
-  const btnDisabled = currPost.heading.length<10||currPost.heading.length>100||currPost.body.length<10||currPost.body.length>2000;
+  const btnDisabled =
+    currPost.heading.length < 10 ||
+    currPost.heading.length > 100 ||
+    currPost.body.length < 10 ||
+    currPost.body.length > 2000;
 
-  //Doing it here because it is almost isolated function:
-  const addNewPost = (e) => {
+  //Image uploading relaed functions: -------------------------------------------------
+  const uploadToFirebase = async (compressedImageFiles) => {
+    const USER_ID = localStorage.getItem("loggedInUserId");
+
+    const urlPromises = [];
+    compressedImageFiles.forEach((imageFile, index) => {
+      console.log(imageFile);
+      const imageRef = ref(storage, `${USER_ID}/${Date.now()}${index}`);
+      const res = uploadBytes(imageRef, imageFile, {
+        contentType: "image/jpeg",
+      })
+        .then((snapshot) => getDownloadURL(imageRef))
+        .catch((error) => {
+          console.log(error);
+        });
+      urlPromises.push(res);
+    });
+    const result = await Promise.all(urlPromises);
+    return result;
+  };
+
+  const compressImages = async (imageFiles) => {
+    const compressedImageFilesPromises = [];
+
+    const options = {
+      maxSizeMB: 0.35,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
+    try {
+      imageFiles.forEach((image) => {
+        const task = imageCompression(image, options);
+        compressedImageFilesPromises.push(task);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    const result = await Promise.all(compressedImageFilesPromises);
+    return result;
+  };
+
+  //Doing it here because it is almost isolated function:------------------------------
+  const addNewPost = async(e) => {
     e.preventDefault();
-    const ENDPOINT = `/api/v1/posts`
-    const ADD_NEW_POST_ENDPOINT = `${HOST}${ENDPOINT}`
-    
-    axios.post(ADD_NEW_POST_ENDPOINT, currPost, {
-      withCredentials: true,
-      credentials: "include",
-    }).then((post) => {
-      setCurrPost(DEFAULT_STATE);
-      navigate("/");
-      showAlert("success", "Complaint Added Successfully")
-    }).catch((err) => {
-      console.log(err);
-      showAlert("danger", "Something went wrong...")
-    })
+    const ENDPOINT = `/api/v1/posts`;
+    const ADD_NEW_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
 
+    //First do the image compression:-----
+    let downloadURLs = []
+    if(imageDataFiles.length!==0){
+      const compressedImages = await compressImages(imageDataFiles);
+      downloadURLs = await uploadToFirebase(compressedImages);
+    }
+
+
+    axios
+      .post(ADD_NEW_POST_ENDPOINT, {...currPost, images: downloadURLs}, {
+        withCredentials: true,
+        credentials: "include",
+      })
+      .then((post) => {
+        setCurrPost(DEFAULT_STATE);
+        navigate("/");
+        showAlert("success", "Complaint Added Successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        showAlert("danger", "Something went wrong...");
+      });
   };
 
   const handleChange = (e) => {
     setCurrPost({
       ...currPost,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleImageChange = (e) => {
+    const currentImageDataFiles = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      currentImageDataFiles.push(e.target.files[i]);
+    }
+    setImageDataFiles(currentImageDataFiles);
+  };
 
   return (
     <div className="row justify-content-center">
@@ -85,7 +154,29 @@ const AddNewPost = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <button className="btn btn-success my-2" onClick={addNewPost} disabled={btnDisabled}>
+            <div className="mb-3 d-block">
+              <h6 className="mx-1 d-inline">
+                <label htmlFor="descriptionInput" className="form-label">
+                  Upload Images:
+                </label>
+                <input
+                  multiple
+                  type="file"
+                  className="form-control"
+                  id="image"
+                  aria-describedby="imageHelp"
+                  placeholder="Upload images"
+                  name="imageUpload"
+                  accept="image/jpeg"
+                  onChange={handleImageChange}
+                />
+              </h6>
+            </div>
+            <button
+              className="btn btn-success my-2"
+              onClick={addNewPost}
+              disabled={btnDisabled}
+            >
               Add now
             </button>
           </form>
