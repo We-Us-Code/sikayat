@@ -33,6 +33,7 @@ const App = () => {
         });
         if (response.data.status === "success") {
           localStorage.setItem("loggedInUserId", response.data.user);
+          localStorage.setItem("role", response.data.role);
           setIsLoggedIn("loggedin");
         } else setIsLoggedIn("loggedout");
       } catch (err) {

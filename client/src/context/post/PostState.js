@@ -91,9 +91,29 @@ const PostState = (props) => {
     }
   };
 
+  //change the status of a post
+  const changeStatus =  async(id) => {
+    const ENDPOINT = `/api/v1/posts/${id}/changeStatus`;
+    const CHANGE_POST_STATUS_ENDPOINT = `${HOST}${ENDPOINT}`;
+    try{
+      const response = axios.patch(CHANGE_POST_STATUS_ENDPOINT, {}, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      console.log(response);
+
+      return true;
+    }catch(error){
+      console.log(error);
+      showAlert("danger", "Something went wrong!")
+      return false;
+    }
+
+  }
+
   return (
     <PostContext.Provider
-      value={{ posts, getPosts, totalPosts, resetToDefaultState, deletePost }}
+      value={{ posts, getPosts, totalPosts, resetToDefaultState, deletePost, changeStatus }}
     >
       {props.children}
     </PostContext.Provider>

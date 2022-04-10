@@ -26,6 +26,7 @@ const Login = () => {
       if(res.status===200){
           setIsLoggedIn("loggedin")
           localStorage.setItem("loggedInUserId", res.data.data.user._id);
+          localStorage.setItem("role", res.data.data.user.role);
           showAlert("success", "Logged-In Successfully")
       }else{
         showAlert("danger", "Something went wrong")

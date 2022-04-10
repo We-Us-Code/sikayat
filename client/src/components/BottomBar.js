@@ -6,7 +6,7 @@ const BottomBar = () => {
       <div className="text-white text-center mb-3 mb-md-0">
         IIT BBS 
         <a className="align-items-center mx-3" href="https://github.com/harshsingh-24/cmp" style={{ color:"inherit", textDecoration:"inherit" }}>
-          <i class="bi bi-github" />
+          <i className="bi bi-github" />
         </a> 
         Sikayat Portal
       </div>
