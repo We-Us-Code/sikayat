@@ -33,6 +33,16 @@ const NavBar = () => {
                 Home
               </Link>
             </li>
+            <li className="nav-item dropdown">
+              <div className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+              </div>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                <li><a className="dropdown-item" href="/">Fresh</a></li>
+                <li><a className="dropdown-item" href="/">Resolved</a></li>
+                <li><a className="dropdown-item" href="/">Addressed</a></li>
+              </ul>
+            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/aboutus">
                 About us
@@ -40,14 +50,20 @@ const NavBar = () => {
             </li>
           </ul>
           {isLoggedIn === "loggedin" && (
-            <Link to="/addnew"  style={{ color:"inherit", textDecoration:"inherit" }}>
+            <Link
+              to="/addnew"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
               <button className="btn btn-outline-success my-2 my-lg-0 mx-2 d-block">
                 Add New
               </button>
             </Link>
           )}
           {isLoggedIn === "loggedin" && (
-            <button className="btn btn-outline-danger my-2 my-lg-0 mx-2 d-block" onClick={logOut}>
+            <button
+              className="btn btn-outline-danger my-2 my-lg-0 mx-2 d-block"
+              onClick={logOut}
+            >
               Log out
             </button>
           )}

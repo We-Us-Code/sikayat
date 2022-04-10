@@ -4,6 +4,7 @@ import axios from "axios";
 import { HOST } from "../constants";
 import { useNavigate } from "react-router-dom";
 import alertContext from "../context/alert/alertContext";
+import loadingBarContext from "../context/loadingBar/loadingBarContext";
 import { storage } from "../utils/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import imageCompression from "browser-image-compression";
@@ -13,6 +14,8 @@ const AddNewPost = () => {
 
   const contextAlert = useContext(alertContext);
   const { showAlert } = contextAlert;
+  const contextLoadingBar = useContext(loadingBarContext);
+  const {setProgress} = contextLoadingBar;
 
   const DEFAULT_STATE = {
     heading: "",
@@ -34,9 +37,12 @@ const AddNewPost = () => {
     const USER_ID = localStorage.getItem("loggedInUserId");
 
     const urlPromises = [];
+    const imgReferences = [];
+
     compressedImageFiles.forEach((imageFile, index) => {
-      console.log(imageFile);
-      const imageRef = ref(storage, `${USER_ID}/${Date.now()}${index}`);
+      const currentRef = `${USER_ID}/${Date.now()}${index}`;
+      const imageRef = ref(storage, currentRef);
+      imgReferences.push(currentRef);
       const res = uploadBytes(imageRef, imageFile, {
         contentType: "image/jpeg",
       })
@@ -46,8 +52,8 @@ const AddNewPost = () => {
         });
       urlPromises.push(res);
     });
-    const result = await Promise.all(urlPromises);
-    return result;
+    const downloadURLs = await Promise.all(urlPromises);
+    return {downloadURLs, imgReferences};
   };
 
   const compressImages = async (imageFiles) => {
@@ -76,24 +82,27 @@ const AddNewPost = () => {
   const addNewPost = async(e) => {
     e.preventDefault();
     setUploading(true);
+    setProgress(20);
     const ENDPOINT = `/api/v1/posts`;
     const ADD_NEW_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
 
     //First do the image compression:-----
-    let downloadURLs = []
+    let uploadResult = {};
     if(imageDataFiles.length!==0){
       const compressedImages = await compressImages(imageDataFiles);
-      downloadURLs = await uploadToFirebase(compressedImages);
+      setProgress(40);
+      uploadResult = await uploadToFirebase(compressedImages);
     }
-
+    setProgress(60);
 
     axios
-      .post(ADD_NEW_POST_ENDPOINT, {...currPost, images: downloadURLs}, {
+      .post(ADD_NEW_POST_ENDPOINT, {...currPost, images: uploadResult.downloadURLs, imgRef: uploadResult.imgReferences}, {
         withCredentials: true,
         credentials: "include",
       })
       .then((post) => {
         setCurrPost(DEFAULT_STATE);
+        setProgress(100);
         navigate("/");
         showAlert("success", "Complaint Added Successfully");
         setUploading(false);
@@ -102,6 +111,7 @@ const AddNewPost = () => {
         console.log(err);
         showAlert("danger", "Something went wrong...");
         setUploading(false);
+        setProgress(100);
       });
   };
 

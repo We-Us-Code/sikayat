@@ -4,6 +4,9 @@ import { HOST } from "../../constants";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import alertContext from "./../alert/alertContext";
+import { storage } from "../../utils/firebase";
+import loadingBarContext from "../loadingBar/loadingBarContext";
+import { ref,  deleteObject } from "firebase/storage";
 
 const PostState = (props) => {
   const navigate = useNavigate();
@@ -11,6 +14,8 @@ const PostState = (props) => {
 
   const contextAlert = useContext(alertContext);
   const { showAlert } = contextAlert;
+  const contextLoadingBar = useContext(loadingBarContext);
+  const {setProgress} = contextLoadingBar;
 
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
@@ -45,12 +50,32 @@ const PostState = (props) => {
   //delete a post
   const deletePost = async (id) => {
     const ENDPOINT = `/api/v1/posts/${id}`;
-    const DELETE_SINGLE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
+    const SINGLE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
+    setProgress(30);
     try {
-      const response = await axios.delete(DELETE_SINGLE_POST_ENDPOINT, {
+      //First fetch the post to be deleted so that images can be deleted:
+      const toBeDeletedPost = await axios.get(SINGLE_POST_ENDPOINT, {
         withCredentials: true,
         credentials: "include",
       });
+      setProgress(50);
+
+      //Fetch the references of images to be deleted:
+      const toBeDeletedImages = toBeDeletedPost.data.data.data.imgRef;
+
+      // Delete the post first:
+      const response = await axios.delete(SINGLE_POST_ENDPOINT, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      setProgress(100);
+
+
+      // //Delete the images from firebase storage:
+      toBeDeletedImages.forEach((currentRef)=>{
+        const imageRefToBeDeleted = ref(storage, currentRef);
+        deleteObject(imageRefToBeDeleted)
+      })
 
       if (response.status === 204) {
         if (location.pathname === "/") window.location.reload();
