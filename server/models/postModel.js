@@ -52,11 +52,10 @@ const postSchema = new mongoose.Schema(
     ],
     status: {
       type: Number, // 0 - Fresh, 1 - Addressed, 2 - Resolved
+      default: 0,
       required: [true, 'A post must have a status'],
-      enum: {
-        values: [0, 1, 2],
-        message: 'Post status is either 0, 1 and 2'
-      }
+      min: 0,
+      max: 2
     }
   },
   {

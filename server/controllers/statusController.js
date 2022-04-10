@@ -10,13 +10,14 @@ const router = express.Router({ mergeParams: true });
 // 1) Check if the user is actually allowed to perform the operation on the post
 
 exports.updateStatus = catchAsync(async (req, res, next) => {
-  const postToBeUpdated = await Post.findById(req.params.id);
+  console.log(req.params.postId);
+  const postToBeUpdated = await Post.findById(req.params.postId);
 
   // Check if the post belongs to user or not
+  console.log(req.user._id, postToBeUpdated.user._id);
   const headerUserId = String(req.user._id);
   const askingUserId = String(postToBeUpdated.user._id);
 
-  console.log('here');
   if (headerUserId !== askingUserId) {
     return next(
       new AppError(
