@@ -38,7 +38,8 @@ exports.createPost = catchAsync(async (req, res, next) => {
     heading: req.body.heading,
     body: req.body.body,
     user: req.user._id,
-    images: req.body.images
+    images: req.body.images,
+    imgRef: req.body.imgRef
   };
   const newPost = await Post.create(createdPost);
 
@@ -55,7 +56,7 @@ exports.updatePost = factory.updateOne(Post);
 exports.deletePost = catchAsync(async (req, res, next) => {
   const docToBeDeleted = await Post.findById(req.params.id);
 
-  // Check if the comment belongs to user or not
+  // Check if the post belongs to user or not
   const headerUserId = String(req.user._id);
   const askingUserId = String(docToBeDeleted.user._id);
 

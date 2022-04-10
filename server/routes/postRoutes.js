@@ -2,6 +2,7 @@ const express = require('express');
 const postController = require('./../controllers/postController');
 const authController = require('./../controllers/authController');
 const voteController = require('./../controllers/voteController');
+const statusController = require('./../controllers/statusController');
 const commentRouter = require('./../routes/commentRoutes');
 
 const router = express.Router();
@@ -31,5 +32,6 @@ router
 
 router.route('/:postId/upvote').patch(voteController.upvotePost);
 router.route('/:postId/downvote').patch(voteController.downvotePost);
+router.route('/:postId/changeStatus').patch(statusController.updateStatus);
 
 module.exports = router;

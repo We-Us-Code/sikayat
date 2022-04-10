@@ -20,6 +20,10 @@ const postSchema = new mongoose.Schema(
       type: [String],
       default: []
     },
+    imgRef: {
+      type: [String],
+      default: []
+    },
     createdAt: {
       type: Date,
       default: () => {
@@ -45,7 +49,15 @@ const postSchema = new mongoose.Schema(
         type: mongoose.Schema.ObjectId,
         ref: 'User'
       }
-    ]
+    ],
+    status: {
+      type: Number, // 0 - Fresh, 1 - Addressed, 2 - Resolved
+      required: [true, 'A post must have a status'],
+      enum: {
+        values: [0, 1, 2],
+        message: 'Post status is either 0, 1 and 2'
+      }
+    }
   },
   {
     toJSON: { virtuals: true },
