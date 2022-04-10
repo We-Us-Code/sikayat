@@ -21,12 +21,13 @@ const AddNewPost = () => {
 
   const [currPost, setCurrPost] = useState(DEFAULT_STATE);
   const [imageDataFiles, setImageDataFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
 
   const btnDisabled =
     currPost.heading.length < 10 ||
     currPost.heading.length > 100 ||
     currPost.body.length < 10 ||
-    currPost.body.length > 2000;
+    currPost.body.length > 2000 || uploading;
 
   //Image uploading relaed functions: -------------------------------------------------
   const uploadToFirebase = async (compressedImageFiles) => {
@@ -74,6 +75,7 @@ const AddNewPost = () => {
   //Doing it here because it is almost isolated function:------------------------------
   const addNewPost = async(e) => {
     e.preventDefault();
+    setUploading(true);
     const ENDPOINT = `/api/v1/posts`;
     const ADD_NEW_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
 
@@ -94,10 +96,12 @@ const AddNewPost = () => {
         setCurrPost(DEFAULT_STATE);
         navigate("/");
         showAlert("success", "Complaint Added Successfully");
+        setUploading(false);
       })
       .catch((err) => {
         console.log(err);
         showAlert("danger", "Something went wrong...");
+        setUploading(false);
       });
   };
 
@@ -177,7 +181,7 @@ const AddNewPost = () => {
               onClick={addNewPost}
               disabled={btnDisabled}
             >
-              Add now
+              {uploading?"Adding...":"Add now"}
             </button>
           </form>
         </div>
