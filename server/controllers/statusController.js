@@ -13,18 +13,12 @@ exports.updateStatus = catchAsync(async (req, res, next) => {
 
   // 1) If admin then allowed to do anything
   if (getUser.role === 'admin') {
-    const doc = await Post.findByIdAndUpdate(
-      req.params.postId,
-      {
-        status: 1
-      },
-      {
-        new: true,
-        runValidators: true
-      }
+    const doc = await Post.updateOne(
+      { _id: req.params.postId, status: 0 },
+      { $set: { status: 1 } }
     );
 
-    if (!doc) {
+    if (doc.nModified === 0) {
       return next(
         new AppError('No post found with that ID for updating status', 404)
       );
@@ -32,7 +26,7 @@ exports.updateStatus = catchAsync(async (req, res, next) => {
     return res.status(200).json({
       status: 'success',
       data: {
-        data: doc
+        data: null
       }
     });
   }
