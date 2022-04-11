@@ -40,9 +40,9 @@ const AboutUs = () => {
           gmailLink={"mailto:sk91@iitbbs.ac.in"}
           linkedinLink={"https://www.linkedin.com/in/sushantiit/"}
           profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/sushant.webp?alt=media&token=c63b22f7-3dcc-4ee0-bc84-52cd69314d05"}
-          text1={"Lorem ipsum harsh singh bla bla bla"}
-          text2={"Lorem ipsum harsh singh bla bla bla"}
-          text3={"Lorem ipsum harsh singh bla bla bla"}
+          text1={"Third Year | CSE | IIT Bhubaneswar"}
+          text2={"MERN | Android"}
+          text3={"Currently Exploring ML domain"}
         />
       </div>
     </>
