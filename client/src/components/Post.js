@@ -8,14 +8,14 @@ import Spinner from "./Spinner"
 const Post = () => {
 
   const contextPost = useContext(postContext);
-  const { posts, getPosts, totalPosts,  resetToDefaultState } = contextPost;
+  const { posts, getPosts, totalPosts,  resetToDefaultState, filter } = contextPost;
 
   useEffect(() => {
     document.title = "Sikayat - Home";
     getPosts();
     return () => {resetToDefaultState()};
     //eslint-disable-next-line
-  }, [])
+  }, [filter])
 
 
   return (
@@ -31,7 +31,7 @@ const Post = () => {
       }
       scrollThreshold ={0.8}
     >
-      <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mx-2">
+      <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mx-2 my-1">
         {
           posts.map((post) => {
             return (
