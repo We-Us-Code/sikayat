@@ -18,9 +18,9 @@ const AboutUs = () => {
           gmailLink={"mailto:hsj13@iitbbs.ac.in"}
           linkedinLink={"https://www.linkedin.com/in/harsh-singh-jadon-55ab4519a/"}
           profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/harsh.jpg?alt=media&token=f4095413-06b1-4b2b-8e44-8f23c4d6462d"}
-          text1={"Lorem ipsum harsh singh bla bla bla"}
-          text2={"Lorem ipsum harsh singh bla bla bla"}
-          text3={"Lorem ipsum harsh singh bla bla bla"}
+          text1={"Third Year | CSE | IIT Bhubaneswar"}
+          text2={"MERN | Artificial Intelligence"}
+          text3={"Currently Exploring DevOps"}
         />
         <Profile
           name={"Jagdish Deshmukh"}
@@ -29,9 +29,9 @@ const AboutUs = () => {
           gmailLink={"mailto:jd13@iitbbs.ac.in"}
           linkedinLink={"https://www.linkedin.com/in/jagdish-deshmukh-iit/"}
           profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/jagdish.jpg?alt=media&token=d50acaca-f66f-4fe1-ab91-10eac83974c0"}
-          text1={"Lorem ipsum harsh singh bla bla bla"}
-          text2={"Lorem ipsum harsh singh bla bla bla"}
-          text3={"Lorem ipsum harsh singh bla bla bla"}
+          text1={"Third Year | CSE | IIT Bhubaneswar"}
+          text2={"React Frontend | Cryptography"}
+          text3={"Currently Exploring MERN"}
         />
         <Profile
           name={"Sushant Kumar"}
