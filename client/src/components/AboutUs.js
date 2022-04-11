@@ -30,7 +30,7 @@ const AboutUs = () => {
           linkedinLink={"https://www.linkedin.com/in/jagdish-deshmukh-iit/"}
           profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/jagdish.jpg?alt=media&token=d50acaca-f66f-4fe1-ab91-10eac83974c0"}
           text1={"Third Year | CSE | IIT Bhubaneswar"}
-          text2={"React Frontend | Cryptography"}
+          text2={"React Frontend"}
           text3={"Currently Exploring MERN"}
         />
         <Profile
