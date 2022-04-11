@@ -28,7 +28,8 @@ const createSendToken = (user, statusCode, req, res) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+    sameSite: 'None',
+    secure: req.secure || req.header('x-forwarded-proto') === 'https'
   });
 
   res.status(statusCode).json({
@@ -86,6 +87,8 @@ exports.protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
+
+  // console.log(token);
 
   //Check if token is not there in headers but browser automatically sent it in cookie
   if (!token && req.cookies.jwt) {

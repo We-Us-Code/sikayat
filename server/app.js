@@ -37,6 +37,7 @@ app.use(express.json({ limit: '10kb' })); // converts our request into JSON form
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
+app.enable('trust proxy');
 
 // Data sanitization against XSS
 app.use(xss());
