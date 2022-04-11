@@ -10,7 +10,12 @@ exports.getAllPosts = catchAsync(async (req, res, next) => {
   let filter = {};
   if (req.params.postId) filter = { post: req.params.postId };
 
-  const totalDocuments = await Post.countDocuments();
+  const filterObj = {};
+  if (req.query.status) {
+    filterObj.status = req.query.status;
+  }
+
+  const totalDocuments = await Post.countDocuments(filterObj);
 
   const features = new APIFeatures(Post.find(filter), req.query)
     .filter()
