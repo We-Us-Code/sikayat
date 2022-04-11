@@ -20,6 +20,7 @@ const PostState = (props) => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(-1); //to prevent endMessage from showing in InfiniteScroll( emptyArray.size !== -1 )
+  const [filter, setFilter] = useState("");
 
   //set default state
   const resetToDefaultState = () => {
@@ -30,7 +31,7 @@ const PostState = (props) => {
 
   //get all posts
   const getPosts = async () => {
-    const ENDPOINT = `/api/v1/posts?page=${page}&limit=6`;
+    const ENDPOINT = `/api/v1/posts?page=${page}&limit=6${filter}`;
     const GET_ALL_POSTS_ENDPOINT = `${HOST}${ENDPOINT}`;
     try {
       const response = await axios.get(GET_ALL_POSTS_ENDPOINT, {
@@ -68,14 +69,19 @@ const PostState = (props) => {
         withCredentials: true,
         credentials: "include",
       });
-      setProgress(100);
+      setProgress(70);
 
 
       // //Delete the images from firebase storage:
+      const deletePromises = [];
       toBeDeletedImages.forEach((currentRef)=>{
         const imageRefToBeDeleted = ref(storage, currentRef);
-        deleteObject(imageRefToBeDeleted)
+        const res = deleteObject(imageRefToBeDeleted);
+        deletePromises.push(res)
       })
+      await Promise.all(deletePromises);
+      setProgress(100)
+
 
       if (response.status === 204) {
         if (location.pathname === "/") window.location.reload();
@@ -113,7 +119,7 @@ const PostState = (props) => {
 
   return (
     <PostContext.Provider
-      value={{ posts, getPosts, totalPosts, resetToDefaultState, deletePost, changeStatus }}
+      value={{ posts, getPosts, totalPosts, resetToDefaultState, deletePost, changeStatus, setFilter, filter }}
     >
       {props.children}
     </PostContext.Provider>

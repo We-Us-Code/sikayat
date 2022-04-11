@@ -8,13 +8,13 @@ import Spinner from "./Spinner"
 const Post = () => {
 
   const contextPost = useContext(postContext);
-  const { posts, getPosts, totalPosts,  resetToDefaultState } = contextPost;
+  const { posts, getPosts, totalPosts,  resetToDefaultState, filter } = contextPost;
 
   useEffect(() => {
     getPosts();
     return () => {resetToDefaultState()};
     //eslint-disable-next-line
-  }, [])
+  }, [filter])
 
 
   return (
