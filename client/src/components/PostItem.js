@@ -128,8 +128,8 @@ const PostItem = (props) => {
           </div>
           <div className="d-flex justify-content-between">
             <div>
-              <i className="bi bi-caret-up-fill" style={{ color: upvoted?"green":"grey" }} onClick={handleUpvote}></i> {upvoteCount}
-              <i className="bi bi-caret-down-fill" style={{ color: downvoted?"red":"grey", marginLeft: "10px" }} onClick={handleDownvote}></i> {downvoteCount}
+              <i className="bi bi-arrow-up-circle-fill" style={{ color: upvoted?"green":"grey", fontSize:"20px"}} onClick={handleUpvote}></i> {upvoteCount}
+              <i className="bi bi-arrow-down-circle-fill" style={{ color: downvoted?"red":"grey", fontSize:"20px", marginLeft: "10px" }} onClick={handleDownvote}></i> {downvoteCount}
             </div>
             {localStorage.getItem("loggedInUserId") === props.post.user._id &&
               <i className="bi bi-trash" style={{ color: "#a30505" }} onClick={handleDeletePost}></i>}

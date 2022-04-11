@@ -12,8 +12,8 @@ const PostDetails = (props) => {
     const {post, getPost, loading, setLoading} = contextPostDetails;
 
     useEffect( () => {
+        document.title = "Sikayat - Post Details";
         getPost(id);
-
         return () => { setLoading(true) }
         //eslint-disable-next-line
     }, []);

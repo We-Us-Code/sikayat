@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import loginContext from "./../context/login/loginContext";
 
 const NavBar = () => {
   const contextLogin = useContext(loginContext);
   const { isLoggedIn, logOut } = contextLogin;
+
+  const location = useLocation();
 
   return (
     <nav
@@ -29,7 +31,7 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <Link className={`nav-link ${location.pathname==="/"?"active":""}`} aria-current="page" to="/">
                 Home
               </Link>
             </li>
@@ -44,7 +46,7 @@ const NavBar = () => {
               </ul>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/aboutus">
+              <Link className={`nav-link ${location.pathname==="/aboutus"?"active":""}`} to="/aboutus">
                 About us
               </Link>
             </li>

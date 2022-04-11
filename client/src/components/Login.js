@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import "../styles/Login.css";
 import { GoogleLogin } from "react-google-login";
 import { HOST } from "../constants";
@@ -11,6 +11,11 @@ const Login = () => {
   const { setIsLoggedIn } = contextLogin;
   const contextAlert = useContext(alertContext);
   const { showAlert } = contextAlert;
+
+  useEffect(() => {
+    document.title = "Sikayat - Login";
+  }, [])
+  
 
   const responseSuccessGoogle = (response) => {
 

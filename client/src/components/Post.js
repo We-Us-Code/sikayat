@@ -11,6 +11,7 @@ const Post = () => {
   const { posts, getPosts, totalPosts,  resetToDefaultState } = contextPost;
 
   useEffect(() => {
+    document.title = "Sikayat - Home";
     getPosts();
     return () => {resetToDefaultState()};
     //eslint-disable-next-line

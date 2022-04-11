@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../styles/Card.css";
 import axios from "axios";
 import { HOST } from "../constants";
@@ -31,6 +31,11 @@ const AddNewPost = () => {
     currPost.heading.length > 100 ||
     currPost.body.length < 10 ||
     currPost.body.length > 2000 || uploading;
+
+  useEffect(() => {
+    document.title = "Sikayat - Add New Post";
+  }, [])
+  
 
   //Image uploading relaed functions: -------------------------------------------------
   const uploadToFirebase = async (compressedImageFiles) => {
