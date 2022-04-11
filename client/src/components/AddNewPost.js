@@ -108,9 +108,9 @@ const AddNewPost = () => {
       .then((post) => {
         setCurrPost(DEFAULT_STATE);
         setProgress(100);
-        navigate("/");
         showAlert("success", "Complaint Added Successfully");
         setUploading(false);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

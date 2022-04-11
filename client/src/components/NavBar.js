@@ -7,7 +7,7 @@ const NavBar = () => {
   const contextLogin = useContext(loginContext);
   const { isLoggedIn, logOut } = contextLogin;
   const contextPost = useContext(postContext);
-  const { setFilter, resetToDefaultState } = contextPost;
+  const { filter, setFilter, resetToDefaultState } = contextPost;
 
   const location = useLocation();
 
@@ -34,7 +34,7 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname==="/"?"active":""}`} aria-current="page" onClick={()=>{setFilter(""); resetToDefaultState();}} to="/">
+              <Link className={`nav-link ${location.pathname==="/"&&filter===""?"active":""}`} aria-current="page" onClick={()=>{setFilter(""); resetToDefaultState();}} to="/">
                 Home
               </Link>
             </li>
@@ -43,9 +43,9 @@ const NavBar = () => {
                 Filter
               </div>
               <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                <li><div className="dropdown-item" style={{color: "red"}} onClick={()=>{setFilter("&status=0"); resetToDefaultState();}}>Fresh</div></li>
-                <li><div className="dropdown-item" style={{color: "yellow"}} onClick={()=>{setFilter("&status=1"); resetToDefaultState();}}>Addressed</div></li>
-                <li><div className="dropdown-item" style={{color: "green"}} onClick={()=>{setFilter("&status=2"); resetToDefaultState();}}>Resolved</div></li>
+                <li><div className="dropdown-item" style={{color: "red", cursor: "pointer"}} onClick={()=>{setFilter("&status=0"); resetToDefaultState();}}>Fresh</div></li>
+                <li><div className="dropdown-item" style={{color: "yellow", cursor: "pointer"}} onClick={()=>{setFilter("&status=1"); resetToDefaultState();}}>Addressed</div></li>
+                <li><div className="dropdown-item" style={{color: "green", cursor: "pointer"}} onClick={()=>{setFilter("&status=2"); resetToDefaultState();}}>Resolved</div></li>
               </ul>
             </li>}
             <li className="nav-item">
