@@ -4,13 +4,15 @@
   "description": "Complaint Management Portal",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "start:prod": "SET NODE_ENV=production& nodemon server.js",
     "debug": "ndb server.js"
   },
   "author": "Harsh Singh Jadon",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
