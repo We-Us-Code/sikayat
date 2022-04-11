@@ -17,8 +17,10 @@ const AboutUs = () => {
           githubLink={"https://github.com/harshsingh-24"}
           gmailLink={"mailto:hsj13@iitbbs.ac.in"}
           linkedinLink={"https://www.linkedin.com/in/harsh-singh-jadon-55ab4519a/"}
-          profilePic={"https://lh3.googleusercontent.com/a-/AOh14GhhTjfT_yMZvCq-faNfmkAlo3Y4-kiFdk_b-qIYSg=s720"}
-          text={"Lorem ipsum harsh singh bla bla bla"}
+          profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/harsh.jpg?alt=media&token=f4095413-06b1-4b2b-8e44-8f23c4d6462d"}
+          text1={"Lorem ipsum harsh singh bla bla bla"}
+          text2={"Lorem ipsum harsh singh bla bla bla"}
+          text3={"Lorem ipsum harsh singh bla bla bla"}
         />
         <Profile
           name={"Jagdish Deshmukh"}
@@ -26,8 +28,10 @@ const AboutUs = () => {
           githubLink={"https://github.com/Jagdish-Deshmukh"}
           gmailLink={"mailto:jd13@iitbbs.ac.in"}
           linkedinLink={"https://www.linkedin.com/in/jagdish-deshmukh-iit/"}
-          profilePic={"https://lh3.googleusercontent.com/a-/AOh14GgcM0PDdE9tE2AgBOyL06IoTDF4BJxXY1m4whby=s720-p-rw-no"}
-          text={"Lorem ipsum jagdish deshmukh bla bla bla"}
+          profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/jagdish.jpg?alt=media&token=d50acaca-f66f-4fe1-ab91-10eac83974c0"}
+          text1={"Lorem ipsum harsh singh bla bla bla"}
+          text2={"Lorem ipsum harsh singh bla bla bla"}
+          text3={"Lorem ipsum harsh singh bla bla bla"}
         />
         <Profile
           name={"Sushant Kumar"}
@@ -35,13 +39,12 @@ const AboutUs = () => {
           githubLink={"https://github.com/sushant-iit"}
           gmailLink={"mailto:sk91@iitbbs.ac.in"}
           linkedinLink={"https://www.linkedin.com/in/sushantiit/"}
-          profilePic={"https://lh3.googleusercontent.com/a-/AOh14GgZRRmIoQ7QS_wqkS7gPpnU4Rr7k8mjLT4sIF1oPg=s720-p-k-rw-no"}
-          text={"Lorem ipsum sushant kumar bla bla bla"}
+          profilePic={"https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/sushant.webp?alt=media&token=c63b22f7-3dcc-4ee0-bc84-52cd69314d05"}
+          text1={"Lorem ipsum harsh singh bla bla bla"}
+          text2={"Lorem ipsum harsh singh bla bla bla"}
+          text3={"Lorem ipsum harsh singh bla bla bla"}
         />
       </div>
-      {/* <a className="align-items-center" href="https://github.com/harshsingh-24/cmp">
-        <i class="bi bi-github" />
-      </a> */}
     </>
   );
 };

@@ -28,7 +28,9 @@ const Profile = (props) => {
                 </a>
               </div>
               <p>
-                {props.text}
+                {props.text1}<br/>
+                {props.text2}<br/>
+                {props.text3}<br/>
               </p>
             </div>
           </div>
