@@ -18,29 +18,36 @@ const Login = () => {
   
 
   const responseSuccessGoogle = (response) => {
+    try{
+      axios({
+        method: "POST",
+        url: `${HOST}/api/v1/users/googlelogin`,
+        withCredentials: true,
+        credentials: "include",
+        data: {
+          tokenId: response.tokenId,
+        },
+      }).then((res) => {
+        if(res.status===200){
+            setIsLoggedIn("loggedin")
+            localStorage.setItem("loggedInUserId", res.data.data.user._id);
+            localStorage.setItem("role", res.data.data.user.role);
+            showAlert("success", "Logged-In Successfully")
+        }else{
+          showAlert("danger", "Something went wrong")
+        }
+      });;
 
-    axios({
-      method: "POST",
-      url: `${HOST}/api/v1/users/googlelogin`,
-      withCredentials: true,
-      credentials: "include",
-      data: {
-        tokenId: response.tokenId,
-      },
-    }).then((res) => {
-      if(res.status===200){
-          setIsLoggedIn("loggedin")
-          localStorage.setItem("loggedInUserId", res.data.data.user._id);
-          localStorage.setItem("role", res.data.data.user.role);
-          showAlert("success", "Logged-In Successfully")
-      }else{
-        showAlert("danger", "Something went wrong")
-      }
-    });;
+    }catch(error){
+      console.log(error);
+      showAlert("danger", "Something went wrong")
+    }
+
   };
 
   const responseErrorGoogle = (response) => {
     console.log(response);
+    showAlert("danger", "Something went wrong");
   };
 
   return (
