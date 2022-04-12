@@ -1,24 +1,27 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import "../styles/Login.css";
 import { GoogleLogin } from "react-google-login";
 import { HOST } from "../constants";
 import axios from "axios";
 import loginContext from "./../context/login/loginContext";
-import alertContext from "./../context/alert/alertContext"
+import alertContext from "./../context/alert/alertContext";
+import loadingBarContext from "./../context/loadingBar/loadingBarContext"
 
 const Login = () => {
   const contextLogin = useContext(loginContext);
   const { setIsLoggedIn } = contextLogin;
   const contextAlert = useContext(alertContext);
   const { showAlert } = contextAlert;
+  const contextLoadingBar = useContext(loadingBarContext);
+  const {setProgress} = contextLoadingBar;
 
   useEffect(() => {
     document.title = "Sikayat - Login";
-  }, [])
-  
+  }, []);
 
   const responseSuccessGoogle = (response) => {
-    try{
+    setProgress(30);
+    try {
       axios({
         method: "POST",
         url: `${HOST}/api/v1/users/googlelogin`,
@@ -28,21 +31,21 @@ const Login = () => {
           tokenId: response.tokenId,
         },
       }).then((res) => {
-        if(res.status===200){
-            setIsLoggedIn("loggedin")
-            localStorage.setItem("loggedInUserId", res.data.data.user._id);
-            localStorage.setItem("role", res.data.data.user.role);
-            showAlert("success", "Logged-In Successfully")
-        }else{
-          showAlert("danger", "Something went wrong")
+        if (res.status === 200) {
+          setIsLoggedIn("loggedin");
+          localStorage.setItem("loggedInUserId", res.data.data.user._id);
+          localStorage.setItem("role", res.data.data.user.role);
+          showAlert("success", "Logged-In Successfully");
+        } else {
+          showAlert("danger", "Something went wrong");
         }
-      });;
-
-    }catch(error){
+        setProgress(100);
+      });
+    } catch (error) {
       console.log(error);
-      showAlert("danger", "Something went wrong")
+      showAlert("danger", "Something went wrong");
+      setProgress(100);
     }
-
   };
 
   const responseErrorGoogle = (response) => {
