@@ -100,8 +100,10 @@ const AddNewPost = () => {
     }
     setProgress(60);
 
+    const postToBeAdded = imageDataFiles.length === 0 ? currPost : {...currPost, images: uploadResult.downloadURLs, imgRef: uploadResult.imgReferences};
+
     axios
-      .post(ADD_NEW_POST_ENDPOINT, {...currPost, images: uploadResult.downloadURLs, imgRef: uploadResult.imgReferences}, {
+      .post(ADD_NEW_POST_ENDPOINT,postToBeAdded , {
         withCredentials: true,
         credentials: "include",
       })

@@ -49,12 +49,6 @@ const PostItem = (props) => {
       return "success"
   }
 
-  useEffect(() => {
-    if (props.post.images.length === 0)
-      props.post.images.push(PLACEHOLDER_IMAGE_URL);
-    //eslint-disable-next-line
-  }, []);
-
   const handleUpvote = async (e) => {
     e.preventDefault();
     const ENDPOINT = `/api/v1/posts/${props.post._id}/upvote`;
