@@ -3,11 +3,14 @@ import LoginContext from "./loginContext";
 import { HOST } from "./../../constants";
 import axios from "axios";
 import alertContext from "../alert/alertContext";
+import postContext from "../post/postContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginState = (props) => {
   const contextAlert = useContext(alertContext);
   const { showAlert } = contextAlert;
+  const contextPost = useContext(postContext);
+  const { setFilter,  resetToDefaultState } = contextPost;
 
   const [isLoggedIn, setIsLoggedIn] = useState("unknown");
   //The value of isLogged In: 'unknown, loggedin, loggedout'
@@ -26,6 +29,8 @@ const LoginState = (props) => {
       if(response.status===200){
         setIsLoggedIn("loggedout");
         showAlert("success", "Logout successfull");
+        setFilter("");
+        resetToDefaultState();
         navigate("/");
       }else{
         showAlert("danger", "Logout Failure");

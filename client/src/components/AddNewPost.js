@@ -5,6 +5,7 @@ import { HOST } from "../constants";
 import { useNavigate } from "react-router-dom";
 import alertContext from "../context/alert/alertContext";
 import loadingBarContext from "../context/loadingBar/loadingBarContext";
+import loginContext from "../context/login/loginContext";
 import { storage } from "../utils/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import imageCompression from "browser-image-compression";
@@ -16,6 +17,8 @@ const AddNewPost = () => {
   const { showAlert } = contextAlert;
   const contextLoadingBar = useContext(loadingBarContext);
   const {setProgress} = contextLoadingBar;
+  const contextLogin = useContext(loginContext);
+  const { isLoggedIn } = contextLogin;
 
   const DEFAULT_STATE = {
     heading: "",
@@ -34,6 +37,8 @@ const AddNewPost = () => {
 
   useEffect(() => {
     document.title = "Sikayat - Add New Post";
+    if(isLoggedIn !== "loggedin")
+      navigate("/");
   }, [])
   
 

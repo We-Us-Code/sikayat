@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/postItem.css";
 import "../styles/Card.css";
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
@@ -10,8 +10,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 const PostItem = (props) => {
-  const PLACEHOLDER_IMAGE_URL =
-    "https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/logohome.webp?alt=media&token=197099a7-3a59-4d08-bb6e-fa112c8d9a9d";
 
   const contextPost = useContext(postContext);
   const { deletePost, changeStatus } = contextPost;
