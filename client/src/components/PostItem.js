@@ -25,6 +25,7 @@ const PostItem = (props) => {
   );
   const [upvoteCount, setUpvoteCount] = useState(props.post.upvoteCount);
   const [downvoteCount, setDownvoteCount] = useState(props.post.downvoteCount);
+  const [disableVoting, setDisableVoting] = useState(false);
   const [status, setStatus] = useState(props.post.status);
   const [requestedChange, setRequestedChange] = useState(false);
 
@@ -49,6 +50,10 @@ const PostItem = (props) => {
 
   const handleUpvote = async (e) => {
     e.preventDefault();
+    if(disableVoting===true) {
+      return;
+    }
+    setDisableVoting(true);
     const ENDPOINT = `/api/v1/posts/${props.post._id}/upvote`;
     const UPVOTE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
     try {
@@ -80,10 +85,15 @@ const PostItem = (props) => {
       console.error(error);
       showAlert("danger", "Something went wrong");
     }
+    setDisableVoting(false);
   };
 
   const handleDownvote = async (e) => {
     e.preventDefault();
+    if(disableVoting===true) {
+      return;
+    }
+    setDisableVoting(true);
     const ENDPOINT = `/api/v1/posts/${props.post._id}/downvote`;
     const DOWNVOTE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
     try {
@@ -115,6 +125,7 @@ const PostItem = (props) => {
       console.error(error);
       showAlert("danger", "Something went wrong");
     }
+    setDisableVoting(false);
   };
 
   const handleDeletePost = (e) => {
