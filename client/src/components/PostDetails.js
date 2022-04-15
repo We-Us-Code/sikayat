@@ -1,8 +1,9 @@
 import React, {useEffect, useContext} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import PostItem from "./PostItem";
 import Comment from "./Comment";
 import postDetailsContext from "../context/postDetails/postDetailsContext";
+import loginContext from "../context/login/loginContext";
 import Spinner from "./Spinner";
 
 const PostDetails = (props) => {
@@ -10,10 +11,15 @@ const PostDetails = (props) => {
     const {id} = useParams();
     const contextPostDetails = useContext(postDetailsContext);
     const {post, getPost, loading, setLoading} = contextPostDetails;
+    const contextLogin = useContext(loginContext);
+    const { isLoggedIn } = contextLogin;
+    const navigate = useNavigate();
 
     useEffect( () => {
         document.title = "Sikayat - Post Details";
         getPost(id);
+        if(isLoggedIn !== "loggedin")
+            navigate("/");
         return () => { setLoading(true) }
         //eslint-disable-next-line
     }, []);

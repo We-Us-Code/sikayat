@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/postItem.css";
 import "../styles/Card.css";
 import timeDifferenceForDate from "../utils/timeDifferenceForDate";
@@ -10,8 +10,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 const PostItem = (props) => {
-  const PLACEHOLDER_IMAGE_URL =
-    "https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/logohome.webp?alt=media&token=197099a7-3a59-4d08-bb6e-fa112c8d9a9d";
 
   const contextPost = useContext(postContext);
   const { deletePost, changeStatus } = contextPost;
@@ -27,6 +25,7 @@ const PostItem = (props) => {
   );
   const [upvoteCount, setUpvoteCount] = useState(props.post.upvoteCount);
   const [downvoteCount, setDownvoteCount] = useState(props.post.downvoteCount);
+  const [disableVoting, setDisableVoting] = useState(false);
   const [status, setStatus] = useState(props.post.status);
   const [requestedChange, setRequestedChange] = useState(false);
 
@@ -49,14 +48,12 @@ const PostItem = (props) => {
       return "success"
   }
 
-  useEffect(() => {
-    if (props.post.images.length === 0)
-      props.post.images.push(PLACEHOLDER_IMAGE_URL);
-    //eslint-disable-next-line
-  }, []);
-
   const handleUpvote = async (e) => {
     e.preventDefault();
+    if(disableVoting===true) {
+      return;
+    }
+    setDisableVoting(true);
     const ENDPOINT = `/api/v1/posts/${props.post._id}/upvote`;
     const UPVOTE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
     try {
@@ -88,10 +85,15 @@ const PostItem = (props) => {
       console.error(error);
       showAlert("danger", "Something went wrong");
     }
+    setDisableVoting(false);
   };
 
   const handleDownvote = async (e) => {
     e.preventDefault();
+    if(disableVoting===true) {
+      return;
+    }
+    setDisableVoting(true);
     const ENDPOINT = `/api/v1/posts/${props.post._id}/downvote`;
     const DOWNVOTE_POST_ENDPOINT = `${HOST}${ENDPOINT}`;
     try {
@@ -123,6 +125,7 @@ const PostItem = (props) => {
       console.error(error);
       showAlert("danger", "Something went wrong");
     }
+    setDisableVoting(false);
   };
 
   const handleDeletePost = (e) => {
