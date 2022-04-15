@@ -44,7 +44,9 @@ const createSendToken = (user, statusCode, req, res) => {
 exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true
+    httpOnly: true,
+    sameSite: 'None',
+    secure: req.secure || req.header('x-forwarded-proto') === 'https'
   });
   res.status(200).json({ status: 'success' });
 };

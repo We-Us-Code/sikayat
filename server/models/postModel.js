@@ -18,7 +18,9 @@ const postSchema = new mongoose.Schema(
     },
     images: {
       type: [String],
-      default: []
+      default: [
+        'https://firebasestorage.googleapis.com/v0/b/sikayat-4f7ee.appspot.com/o/logohome.webp?alt=media&token=197099a7-3a59-4d08-bb6e-fa112c8d9a9d'
+      ]
     },
     imgRef: {
       type: [String],
