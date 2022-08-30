@@ -30,19 +30,19 @@
 ### 1. **Entity Relationship Diagram**
 
 <p align = "center">
-<img src="images/er.png" style="width:50%; height:65%;"/>
+<img src="images/er.png" style="width:90%; height:110%;"/>
 </p>
   
 ### 2. **Login Architecture**
 
 <p align = "center">
-<img src="images/login.png" style="width:50%; height:65%;"/>
+<img src="images/login.png" style="width:90%; height:110%;"/>
 </p>
 
 ### 3. **Website Architecture**
 
 <p align = "center">
-<img src="images/arch.png" style="width:50%; height:65%;"/>
+<img src="images/arch.png" style="width:90%; height:110%;"/>
 </p>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
