@@ -25,7 +25,7 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-<h2 id="tech"> :gear: Architecture Diagrams </h2>
+<h2 id="arch"> :gear: Architecture Diagrams </h2>
 
 ### 1. **Entity Relationship Diagram**
 
