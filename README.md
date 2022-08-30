@@ -8,6 +8,8 @@
 <h2 id="content"> 📝 Contents </h2>
 
  1. [Technologies Used](#tech)
+ 2. [Architecture Diagrams](#arch)
+ 3. [Credits](#credits)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -20,6 +22,28 @@
   <li> GoogleOAuth - Open Authorization from Google </li>
   <li> Bootstrap - CSS framework for responsive frontend </li>
 </ul>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+<h2 id="tech"> :gear: Architecture Diagrams </h2>
+
+### 1. **Entity Relationship Diagram**
+
+<p align = "center">
+<img src="images/er.png" style="width:50%; height:65%;"/>
+</p>
+  
+### 2. **Login Architecture**
+
+<p align = "center">
+<img src="images/login.png" style="width:50%; height:65%;"/>
+</p>
+
+### 3. **Website Architecture**
+
+<p align = "center">
+<img src="images/arch.png" style="width:50%; height:65%;"/>
+</p>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
