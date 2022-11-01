@@ -47,6 +47,12 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
+<h2 id="arch"> :loud_sound: API Documentation </h2> 
+
+The corresponding API documentation for server can be found at: [API Docs](https://documenter.getpostman.com/view/20102046/2s8YRiMEwy)
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
 <!-- CREDITS -->
 <h2 id="credits"> 📜 Credits</h2>
 
@@ -60,6 +66,7 @@ Sikayat is powered by:
     <img src="https://github.com/devicons/devicon/blob/master/icons/heroku/heroku-original-wordmark.svg" width="80" height="80"  alt="HEROKU"/>
 </a>
   </p>
+  
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
