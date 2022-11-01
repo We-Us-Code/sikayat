@@ -9,7 +9,8 @@
 
  1. [Technologies Used](#tech)
  2. [Architecture Diagrams](#arch)
- 3. [Credits](#credits)
+ 3. [API Documentation](#apidocs)
+ 4. [Credits](#credits)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -47,7 +48,7 @@
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-<h2 id="arch"> :loud_sound: API Documentation </h2> 
+<h2 id="apidocs"> :loud_sound: API Documentation </h2> 
 
 The corresponding API documentation for server can be found at: [API Docs](https://documenter.getpostman.com/view/20102046/2s8YRiMEwy)
 
