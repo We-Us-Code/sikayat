@@ -62,15 +62,18 @@ const Login = () => {
             <img src="./logohome.webp" className="img-fluid" alt="Sample" />
           </div>
           <div className="col-sm-8 col-md-6 col-lg-4">
-            <div className="d-flex justify-content-center"></div>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                responseSuccessGoogle(credentialResponse);
-              }}
-              onError={(error) => {
-                responseErrorGoogle(error);
-              }}
-            />
+            <div className="d-flex justify-content-center">
+              <GoogleLogin
+                theme="filled_blue"
+                useOneTap={true}
+                onSuccess={(credentialResponse) => {
+                  responseSuccessGoogle(credentialResponse);
+                }}
+                onError={(error) => {
+                  responseErrorGoogle(error);
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
