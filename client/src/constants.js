@@ -1,1 +1,1 @@
-export const HOST = "https://sikayat.herokuapp.com"
+export const HOST = "https://sikayat.vercel.app";

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import "../styles/Login.css";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
 import { HOST } from "../constants";
 import axios from "axios";
 import loginContext from "./../context/login/loginContext";
 import alertContext from "./../context/alert/alertContext";
-import loadingBarContext from "./../context/loadingBar/loadingBarContext"
+import loadingBarContext from "./../context/loadingBar/loadingBarContext";
 
 const Login = () => {
   const contextLogin = useContext(loginContext);
@@ -13,7 +13,7 @@ const Login = () => {
   const contextAlert = useContext(alertContext);
   const { showAlert } = contextAlert;
   const contextLoadingBar = useContext(loadingBarContext);
-  const {setProgress} = contextLoadingBar;
+  const { setProgress } = contextLoadingBar;
 
   useEffect(() => {
     document.title = "Sikayat - Login";
@@ -28,7 +28,7 @@ const Login = () => {
         withCredentials: true,
         credentials: "include",
         data: {
-          tokenId: response.tokenId,
+          tokenId: response.credential,
         },
       }).then((res) => {
         if (res.status === 200) {
@@ -62,15 +62,15 @@ const Login = () => {
             <img src="./logohome.webp" className="img-fluid" alt="Sample" />
           </div>
           <div className="col-sm-8 col-md-6 col-lg-4">
-            <div className="d-flex justify-content-center">
-              <GoogleLogin
-                clientId="212605746801-9n19oa0qd07gguojn69t9ubhn0njhjis.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={responseSuccessGoogle}
-                onFailure={responseErrorGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
-            </div>
+            <div className="d-flex justify-content-center"></div>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                responseSuccessGoogle(credentialResponse);
+              }}
+              onError={(error) => {
+                responseErrorGoogle(error);
+              }}
+            />
           </div>
         </div>
       </div>
