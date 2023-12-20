@@ -8,6 +8,9 @@
 <h2 id="content"> 📝 Contents </h2>
 
  1. [Technologies Used](#tech)
+ 2. [Architecture Diagrams](#arch)
+ 3. [API Documentation](#apidocs)
+ 4. [Credits](#credits)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -20,6 +23,34 @@
   <li> GoogleOAuth - Open Authorization from Google </li>
   <li> Bootstrap - CSS framework for responsive frontend </li>
 </ul>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+<h2 id="arch"> :gear: Architecture Diagrams </h2>
+
+### 1. **Entity Relationship Diagram**
+
+<p align = "center">
+<img src="images/er.png" style="width:90%; height:110%;"/>
+</p>
+  
+### 2. **Login Architecture**
+
+<p align = "center">
+<img src="images/login.png" style="width:90%; height:110%;"/>
+</p>
+
+### 3. **Website Architecture**
+
+<p align = "center">
+<img src="images/arch.png" style="width:90%; height:110%;"/>
+</p>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+<h2 id="apidocs"> :loud_sound: API Documentation </h2> 
+
+The corresponding API documentation for server can be found at: [API Docs](https://documenter.getpostman.com/view/20102046/2s8YRiMEwy)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
@@ -36,6 +67,7 @@ Sikayat is powered by:
     <img src="https://github.com/devicons/devicon/blob/master/icons/heroku/heroku-original-wordmark.svg" width="80" height="80"  alt="HEROKU"/>
 </a>
   </p>
+  
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
