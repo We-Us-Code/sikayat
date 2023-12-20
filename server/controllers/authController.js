@@ -29,7 +29,7 @@ const createSendToken = (user, statusCode, req, res) => {
     ),
     httpOnly: true,
     sameSite: 'None',
-    secure: req.secure || req.header('x-forwarded-proto') === 'https'
+    secure: true
   });
 
   res.status(statusCode).json({
@@ -46,7 +46,7 @@ exports.logout = (req, res) => {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
     sameSite: 'None',
-    secure: req.secure || req.header('x-forwarded-proto') === 'https'
+    secure: true
   });
   res.status(200).json({ status: 'success' });
 };
@@ -55,7 +55,10 @@ exports.googleLogin = catchAsync(async (req, res, next) => {
   const { tokenId } = req.body;
 
   client
-    .verifyIdToken({ idToken: tokenId, audience: process.env.GOOGLE_CLIENT_ID })
+    .verifyIdToken({
+      idToken: tokenId,
+      requiredAudience: process.env.GOOGLE_CLIENT_ID
+    })
     .then(async googleRes => {
       const isEmailVerified = googleRes.payload.email_verified;
 
